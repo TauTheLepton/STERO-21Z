@@ -17,8 +17,7 @@ def talker(side):
    czas_ang = (math.pi/2)/angular
    iters_lin = int(czas_lin / 0.1)
    iters_ang = int(czas_ang / 0.1)
-   # linear = input("Input linear vel: ")
-   # angular = input("Input angular vel: ")
+  
    count = 4
    while not rospy.is_shutdown() and count > 0:
       for i in range(iters_lin):
@@ -34,8 +33,6 @@ def talker(side):
 
       count -= 1
 
-      # pub.publish(vel_msg)
-      # rate.sleep()
 
 if __name__ == '__main__':
    try:
