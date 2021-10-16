@@ -12,11 +12,11 @@ def talker(side):
    rospy.init_node('kinematic', anonymous=True)
    rate = rospy.Rate(10) # 10hz 0.1s
    vel_msg = Twist()
-   print("Let's ove you ass!")
-   czas_lin = side/linear
-   czas_ang = (math.pi/2)/angular
-   iters_lin = int(czas_lin / 0.1)
-   iters_ang = int(czas_ang / 0.1)
+   print("Let's move your ass!")
+   time_lin = side/linear
+   time_ang = (math.pi/2)/angular
+   iters_lin = int(time_lin / 0.1)
+   iters_ang = int(time_ang / 0.1)
   
    count = 4
    while not rospy.is_shutdown() and count > 0:
