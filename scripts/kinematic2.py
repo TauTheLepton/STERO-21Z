@@ -6,11 +6,11 @@ from nav_msgs.msg import Odometry
 import math
 from tf.transformations import euler_from_quaternion
 
+# speeds
 linear = 0.11
-angular = -0.1
-eps_lin = 0.1
-eps_ang = 0.025
+angular = 0.1
 
+# declarations
 callback_data_x = 0.0
 callback_data_y = 0.0
 callback_data_orient = 0.0
@@ -39,6 +39,7 @@ def calc_angle_diff(actual, goal, speed):
 def calc_distance(actualX, actualY, goalX, goalY):
    return math.sqrt((goalX - actualX) ** 2 + (goalY - actualY) ** 2)
 
+# used in odometry subscriber
 def odom_callback(odometry):
    global callback_data_x, callback_data_y, callback_data_orient
    callback_data_x = odometry.pose.pose.position.x
@@ -48,6 +49,7 @@ def odom_callback(odometry):
    if callback_data_orient < 0:
       callback_data_orient = callback_data_orient + math.pi * 2
 
+# does the actual square
 def talker(side):
    pub = rospy.Publisher('/key_vel', Twist, queue_size=10)
    sub = rospy.Subscriber('/mobile_base_controller/odom', Odometry, odom_callback)
@@ -71,19 +73,37 @@ def talker(side):
       elif goal_orient < 0:
          goal_orient += math.pi * 2
       # linear movement
-      while calc_distance(callback_data_x, callback_data_y, goal_pose_x, goal_pose_y) > eps_lin:
+      dist_new = calc_distance(callback_data_x, callback_data_y, goal_pose_x, goal_pose_y)
+      go_straight = True
+      while go_straight:
+         dist_old = dist_new
+         dist_new = calc_distance(callback_data_x, callback_data_y, goal_pose_x, goal_pose_y)
+         if dist_new > dist_old + 0.001: # + 0.001 to reduce impact of measurement noise
+            go_straight = False
+         # platynowy debugger
+         print("GOING STRAIGHT")
          print("goal", goal_pose_x, goal_pose_y)
          print("actual", callback_data_x, callback_data_y)
-         print("distance", calc_distance(callback_data_x, callback_data_y, goal_pose_x, goal_pose_y))
+         print("distance", dist_new)
+         print("--------------------------------------------------")
          vel_msg.linear.x = linear
          vel_msg.angular.z = 0
          pub.publish(vel_msg)
          rate.sleep()
       # rotation
-      while calc_angle_diff(callback_data_orient, goal_orient, angular) > eps_ang:
+      angle_diff_new = calc_angle_diff(callback_data_orient, goal_orient, angular)
+      do_turn = True
+      while do_turn:
+         angle_diff_old = angle_diff_new
+         angle_diff_new = calc_angle_diff(callback_data_orient, goal_orient, angular)
+         if angle_diff_new > angle_diff_old + 0.001: # + 0.001 to reduce impact of measurement noise
+            do_turn = False
+         # platynowy debugger
+         print("TURNING")
          print("goal", goal_orient)
          print("actual", callback_data_orient)
-         print("distance", calc_angle_diff(callback_data_orient, goal_orient, angular))
+         print("distance", angle_diff_new)
+         print("--------------------------------------------------")
          vel_msg.linear.x = 0
          vel_msg.angular.z = angular
          pub.publish(vel_msg)
