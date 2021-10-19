@@ -111,8 +111,30 @@ def talker(side):
       count -= 1
 
 if __name__ == '__main__':
+   # user resistant UI
+   incorrect_input = True
+   while incorrect_input:
+      dir_input = raw_input("Do you want to turn right or left? [R/L]: ")
+      if dir_input == "l" or dir_input == "L":
+         incorrect_input = False
+      elif dir_input == "r" or dir_input == "R":
+         incorrect_input = False
+         angular = -angular
+      else:
+         print("Write 'L' or 'R'")
+   incorrect_input = True
+   while incorrect_input:
+      side = raw_input("Length of squares side: ")
+      try:
+         side = float(side)
+      except:
+         print("Write a number")
+      else:
+         if side <= 0:
+            print("Write a positive number")
+         else:
+            incorrect_input = False
    try:
-      side = input("Podaj dlugosc boku: ")
       talker(side)
    except rospy.ROSInterruptException:
       pass
