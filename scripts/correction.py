@@ -1,5 +1,5 @@
 import rospy
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, PoseWithCovarianceStamped
 from gazebo_msgs.msg import ModelStates
 from nav_msgs.msg import Odometry
 # from gazebo_msgs import ModelStates
@@ -20,6 +20,10 @@ combined X and Y axis speeds to one speed:
 quaternions to rpy:
 /mobile_base_controller/odom/pose/pose/orientation -> /combined/angular/x
 /gazebo/model_states/pose[1]/orientation -> /combined/angular/y
+
+errors:
+error in this one iteration -> /combined/linear/y
+all errors summed -> /combined/linear/z
 """
 
 # declarations
@@ -28,6 +32,9 @@ callback_data_y = 0.0
 callback_data_orient = 0.0
 vel_lin = 0.0
 callback_data_orient_ref = 0.0
+callback_data_x_ref = 0.0
+callback_data_y_ref = 0.0
+err_sum = 0.0
 
 # used in odometry subscriber
 def odom_callback(odometry):
@@ -51,13 +58,30 @@ def odom_callback_vel(model_state):
     # print(vel_linX, vel_linY)
     vel_lin = math.sqrt(vel_linX ** 2 + vel_linY ** 2)
 
+def global_pose_callback(data):
+    global callback_data_x_ref, callback_data_y_ref, callback_data_x, callback_data_y, err_sum
+    callback_data_x_ref = data.pose.pose.position.x
+    callback_data_y_ref = data.pose.pose.position.y
+    # variant A
+    err = math.sqrt((callback_data_x - callback_data_x_ref) ** 2 + (callback_data_y - callback_data_y_ref) ** 2)
+    # variant B
+    # err = abs(callback_data_x - callback_data_x_ref) + abs(callback_data_y - callback_data_y_ref)
+    # sum of errors
+    err_sum += err
+    # platynowy debugger
+    # print(err)
+    # print(err_sum)
+    # print('-----')
+
+
 # corrects position and orientation - adds offset of the first position
 def correction(mode):
-    global callback_data_x, callback_data_y, callback_data_orient, vel_lin
+    global callback_data_x, callback_data_y, callback_data_orient, vel_lin, err, err_sum
     pub = rospy.Publisher('/mobile_base_controller/odom1', Odometry, queue_size=10)
     sub = rospy.Subscriber('/mobile_base_controller/odom', Odometry, odom_callback)
     pub_twist = rospy.Publisher('/combined', Twist, queue_size=10)
     sub_twist = rospy.Subscriber('/gazebo/model_states', ModelStates, odom_callback_vel)
+    sub_global = rospy.Subscriber('/robot_pose', PoseWithCovarianceStamped, global_pose_callback)
     rospy.init_node('correction', anonymous=True)
     rate = rospy.Rate(10) # 10hz 0.1s
     odom_msg = Odometry()
@@ -98,6 +122,9 @@ def correction(mode):
         twist_msg.angular.x = callback_data_orient
         twist_msg.angular.y = callback_data_orient_ref
         pub_twist.publish(twist_msg)
+
+        twist_msg.linear.y = err
+        twist_msg.linear.z = err_sum
 
         rate.sleep()
 
