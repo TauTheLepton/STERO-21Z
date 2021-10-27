@@ -34,6 +34,7 @@ vel_lin = 0.0
 callback_data_orient_ref = 0.0
 callback_data_x_ref = 0.0
 callback_data_y_ref = 0.0
+err = 0.0
 err_sum = 0.0
 
 # used in odometry subscriber
@@ -59,9 +60,10 @@ def odom_callback_vel(model_state):
     vel_lin = math.sqrt(vel_linX ** 2 + vel_linY ** 2)
 
 def global_pose_callback(data):
-    global callback_data_x_ref, callback_data_y_ref, callback_data_x, callback_data_y, err_sum
+    global callback_data_x_ref, callback_data_y_ref, callback_data_x, callback_data_y, err, err_sum
     callback_data_x_ref = data.pose.pose.position.x
     callback_data_y_ref = data.pose.pose.position.y
+    err = 0
     # variant A
     err = math.sqrt((callback_data_x - callback_data_x_ref) ** 2 + (callback_data_y - callback_data_y_ref) ** 2)
     # variant B
