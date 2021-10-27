@@ -10,7 +10,16 @@ from tf.transformations import euler_from_quaternion, quaternion_from_euler
 from geometry_msgs.msg._Quaternion import Quaternion
 
 """
-this node is.
+added offset to 'odom' data so it starts from 'map' position:
+/mobile_base_controller/odom/pose/pose/position -> /mobile_base_controller/odom1/pose/pose/position
+(/x, /y and /orientation (last one as quaternion))
+
+combined X and Y axis speeds to one speed:
+ gazebo/model_states/twist[1]/linear-> /combined/linear/x
+
+quaternions to rpy:
+/mobile_base_controller/odom/pose/pose/orientation -> /combined/angular/x
+/gazebo/model_states/pose[1]/orientation -> /combined/angular/y
 """
 
 # declarations
