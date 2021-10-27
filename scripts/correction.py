@@ -106,6 +106,8 @@ def correction(mode):
             callback_data_x_adj = callback_data_x + 0.231
             callback_data_y_adj = callback_data_y + 1.225
             callback_data_orient += 1.297
+        else:
+            pass
         # normalize angle
         if callback_data_orient > math.pi:
             callback_data_orient = math.pi - (callback_data_orient - math.pi)
@@ -142,7 +144,7 @@ if __name__ == '__main__':
         except:
             print("Choose mode '1' or '2' or '3'")
         else:
-            if mode < 1 or mode > 3:
+            if mode < 1 or mode > 4:
                 print("Choose mode '1' or '2' or '3'")
             else:
                 incorrect_input = False
