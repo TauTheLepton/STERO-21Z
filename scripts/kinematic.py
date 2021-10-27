@@ -5,7 +5,7 @@ from geometry_msgs.msg import Twist
 import math
 
 linear = 0.11
-angular = 0.6
+angular = 0.1
 
 def talker(side):
    pub = rospy.Publisher('/key_vel', Twist, queue_size=10)
