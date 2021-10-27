@@ -88,21 +88,23 @@ def correction(mode):
     rate = rospy.Rate(10) # 10hz 0.1s
     odom_msg = Odometry()
     twist_msg = Twist()
+    callback_data_x_adj = 0.0
+    callback_data_y_adj = 0.0
     while not rospy.is_shutdown():
         # low speed
         if mode == 1:
-            callback_data_x += 0.162
-            callback_data_y += 1.181
+            callback_data_x_adj = callback_data_x + 0.162
+            callback_data_y_adj = callback_data_y + 1.181
             callback_data_orient += 1.414
         # high speed
         elif mode == 2:
-            callback_data_x += 0.308
-            callback_data_y += 1.271
+            callback_data_x_adj = callback_data_x + 0.308
+            callback_data_y_adj = callback_data_y + 1.271
             callback_data_orient += 1.266
         # very high sped
         elif mode == 3:
-            callback_data_x += 0.231
-            callback_data_y += 1.225
+            callback_data_x_adj = callback_data_x + 0.231
+            callback_data_y_adj = callback_data_y + 1.225
             callback_data_orient += 1.297
         # normalize angle
         if callback_data_orient > math.pi:
@@ -114,8 +116,8 @@ def correction(mode):
         # platynowy debugger
         # print(2)
         # print(type(return_callback_data_orient))
-        odom_msg.pose.pose.position.x = callback_data_x
-        odom_msg.pose.pose.position.y = callback_data_y
+        odom_msg.pose.pose.position.x = callback_data_x_adj
+        odom_msg.pose.pose.position.y = callback_data_y_adj
         odom_msg.pose.pose.position.z = 0
         odom_msg.pose.pose.orientation = return_callback_data_orient
         pub.publish(odom_msg)
