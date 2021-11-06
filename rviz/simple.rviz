@@ -505,6 +505,11 @@ Visualization Manager:
           Value: true
       Enabled: true
       Name: Control
+      # adds map on start
+    - Class: rviz/Map
+      Topic: /map
+      Enabled: true
+      Name: Map
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
