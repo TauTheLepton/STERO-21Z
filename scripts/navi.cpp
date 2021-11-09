@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     // topic is '/key_vel' i guess. or '/nav_vel'???
     // position is maybe '/ground_truth_odom'?
     // '/input_joy/cmd_vel' another vel???
-    ros::Publisher pub_vel = n.advertise<geometry_msgs::Twist>("topic", 1000); // set the right topic to publish velocity
+    ros::Publisher pub_vel = n.advertise<geometry_msgs::Twist>("key_vel", 1000); // set the right topic to publish velocity
     // ros::Subscriber sub = n.subscribe("some_topic", 1000, my_callback);
     ros::Rate loop_rate(10);
 

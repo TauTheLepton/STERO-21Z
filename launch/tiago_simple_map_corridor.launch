@@ -73,5 +73,16 @@
   </group>
   <node name="image_proc" pkg="image_proc" type="image_proc" ns="xtion/rgb"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(find stero_mobile_init)/maps/moja_mapa_korytarz.yaml"/> <!-- adds map server to host our map -->
-<node name="fake_global_loc" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 map odom 10"/> <!-- fooling system, there is some global localization -->
+  <node name="fake_global_loc" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 map odom 10"/> <!-- fooling system, there is some global localization -->
+  <!-- loading params -->
+  <node name="navi" pkg="stero_mobile_init" type="navi">
+    <!-- costmap params -->
+    <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_local"/>
+    <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_global"/>
+    <rosparam file="$(find stero_mobile_init)/navi_param/global_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find stero_mobile_init)/navi_param/local_costmap_params.yaml" command="load"/>
+    <!-- planner params -->
+    <rosparam file="$(find stero_mobile_init)/navi_param/global_planner_params.yaml" command="load"/>
+    <rosparam file="$(find stero_mobile_init)/navi_param/local_planner_params.yaml" command="load"/>
+  </node>
 </launch>
