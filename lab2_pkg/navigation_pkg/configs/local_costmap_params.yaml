@@ -1,0 +1,17 @@
+local_costmap:
+  #coordinate frame the costmap
+  global_frame: odom
+  #reference for the base of the robot
+  robot_base_frame: base_link
+  #update frequency of the costmap
+  update_frequency: 5.0
+  #costmap publishing visualization information frequency
+  publish_frequency: 2.0
+  #costmap manual initialization, shoulde de set to false when rolling window is true
+  static_map: false
+  #true - costmap will remain centered around the robot while it moves
+  rolling_window: true
+  #defining size of the local costmap
+  width: 6.0
+  height: 6.0
+  resolution: 0.05
