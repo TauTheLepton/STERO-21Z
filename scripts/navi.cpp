@@ -53,8 +53,12 @@ int main(int argc, char **argv)
     dwa_local_planner::DWAPlannerROS planner_local;
     planner_local.initialize("planner_local", &buf, &costmap_local);
 
-    global_planner::GlobalPlanner planner_global;
-    planner_global.initialize("planner_global", &costmap_global);
+    // idk which initialization for GlobalPlanner is better, but as for now neither work
+
+    // global_planner::GlobalPlanner planner_global;
+    // planner_global.initialize("planner_global", &costmap_global);
+
+    global_planner::GlobalPlanner planner_global("planner_global", costmap_global.getCostmap(), "map");
 
     int count = 0;
     while (ros::ok())
