@@ -7,11 +7,12 @@
 #include <sstream>
 #include "geometry_msgs/PoseStamped.h"
 #include "rotate_recovery/rotate_recovery.h"
+#include "nav_msgs/Odometry.h"
 
-geometry_msgs::PoseStamped pose_current;
+nav_msgs::Odometry pose_current;
 geometry_msgs::PoseStamped pose_goal;
 
-void get_current_pose_callback(const geometry_msgs::PoseStamped::ConstPtr& pose)
+void get_current_pose_callback(const nav_msgs::Odometry::ConstPtr& pose)
 {
     pose_current = *pose;
     pose_current.header.frame_id = "map";
@@ -59,6 +60,22 @@ void get_goal_callback(const geometry_msgs::PoseStamped::ConstPtr& pose)
 
 // }
 
+geometry_msgs::PoseStamped odom2pose(nav_msgs::Odometry odom)
+{
+    geometry_msgs::PoseStamped my_pose;
+    my_pose.pose.position.x = odom.pose.pose.position.x;
+    my_pose.pose.position.y = odom.pose.pose.position.y;
+    my_pose.pose.position.z = odom.pose.pose.position.z;
+    my_pose.pose.orientation.w = odom.pose.pose.orientation.w;
+    my_pose.pose.orientation.x = odom.pose.pose.orientation.x;
+    my_pose.pose.orientation.y = odom.pose.pose.orientation.y;
+    my_pose.pose.orientation.z = odom.pose.pose.orientation.z;
+    my_pose.header.frame_id = odom.header.frame_id;
+    my_pose.header.seq = odom.header.seq;
+    my_pose.header.stamp = odom.header.stamp;
+    return my_pose;
+}
+
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "navi");
@@ -100,8 +117,9 @@ int main(int argc, char **argv)
     while (ros::ok())
     {
         if (reached_goal) {
-            pose_start = pose_current;
+            // pose_start = pose_current;
             pose_start.header.frame_id = "map";
+            pose_start = odom2pose(pose_current);
             planner_global.makePlan(pose_start, pose_goal, plan);
             planner_local.setPlan(plan);
         } else {
