@@ -8,29 +8,37 @@
 #include "geometry_msgs/PoseStamped.h"
 #include "rotate_recovery/rotate_recovery.h"
 
-void my_callback(const std_msgs::StringConstPtr& str)
+geometry_msgs::PoseStamped pose_current;
+geometry_msgs::PoseStamped pose_goal;
+
+void get_current_pose_callback(const geometry_msgs::PoseStamped::ConstPtr& pose)
 {
-    double i=1;
-    printf("Current i = %2.2f", i);
+    pose_current = *pose;
+    pose_current.header.frame_id = "map";
+}
+
+void get_goal_callback(const geometry_msgs::PoseStamped::ConstPtr& pose)
+{
+    pose_goal = *pose;
+    pose_goal.header.frame_id = "map";
 }
 
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "navi");
     ros::NodeHandle n;
-    // topic is '/key_vel' i guess. or '/nav_vel'???
-    // position is maybe '/ground_truth_odom'?
-    // '/input_joy/cmd_vel' another vel???
-    ros::Publisher pub_vel = n.advertise<geometry_msgs::Twist>("key_vel", 1000); // set the right topic to publish velocity
-    // ros::Subscriber sub = n.subscribe("some_topic", 1000, my_callback);
+
+    ros::Publisher pub_vel = n.advertise<geometry_msgs::Twist>("key_vel", 1000);
+    ros::Subscriber sub_current = n.subscribe("/mobile_base_controller/odom", 1000, get_current_pose_callback);
+    ros::Subscriber sub_goal = n.subscribe("/move_base_simple/goal", 1000, get_goal_callback);
     ros::Rate loop_rate(10);
 
-    std::vector<geometry_msgs::PoseStamped> plan;
     geometry_msgs::PoseStamped pose_start;
-    geometry_msgs::PoseStamped pose_goal;
+    std::vector<geometry_msgs::PoseStamped> plan;
+
     geometry_msgs::Twist vel;
 
-    bool reached_goal = false;
+    bool reached_goal = true;
 
     // sth here didn't want to work, and I had to paste this line to command line:
     // sudo ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
@@ -48,13 +56,15 @@ int main(int argc, char **argv)
     global_planner::GlobalPlanner planner_global;
     planner_global.initialize("planner_global", &costmap_global);
 
-    planner_global.makePlan(pose_start, pose_goal, plan);
-    planner_local.setPlan(plan);
-
     int count = 0;
     while (ros::ok())
     {
-        if (!reached_goal) {
+        if (reached_goal) {
+            pose_start = pose_current;
+            pose_start.header.frame_id = "map";
+            planner_global.makePlan(pose_start, pose_goal, plan);
+            planner_local.setPlan(plan);
+        } else {
             reached_goal = planner_local.isGoalReached();
             bool found_trajectory = planner_local.computeVelocityCommands(vel); // could use dwaComputeVelocityCommands(), but needs 2 arguments
             if (found_trajectory) {
