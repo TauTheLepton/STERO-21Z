@@ -63,21 +63,10 @@ int main(int argc, char **argv)
 {
     ros::init(argc, argv, "navi");
     ros::NodeHandle n;
-<<<<<<< HEAD
-    // topic is '/key_vel' i guess. or '/nav_vel'???
-    // position is maybe '/ground_truth_odom'?
-    // '/input_joy/cmd_vel' another vel???
-    // Subscriber 
-    //ros::Subscriber goal_sub = n.subscribe("move_base_simple/goal", 1000, goal_callback);
-    //ros::Subscriber g_costmap_sub = n.subscribe("map", 1000, g_costmap_callback);
-    ros::Publisher pub_vel = n.advertise<geometry_msgs::Twist>("key_vel", 1000); // set the right topic to publish velocity
-    // ros::Subscriber sub = n.subscribe("some_topic", 1000, my_callback);
-=======
 
     ros::Publisher pub_vel = n.advertise<geometry_msgs::Twist>("key_vel", 1000);
     ros::Subscriber sub_current = n.subscribe("/mobile_base_controller/odom", 1000, get_current_pose_callback);
     ros::Subscriber sub_goal = n.subscribe("/move_base_simple/goal", 1000, get_goal_callback);
->>>>>>> 1d5aaa40acb04e09c46af0ff765c827ad9378819
     ros::Rate loop_rate(10);
 
     geometry_msgs::PoseStamped pose_start;
