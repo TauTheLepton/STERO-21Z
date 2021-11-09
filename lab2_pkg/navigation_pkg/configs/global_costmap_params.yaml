@@ -3,7 +3,11 @@ global_costmap:
   global_frame: map
   #reference for the base of the robot
   robot_base_frame: base_link
+  #maximum distance from obstacles
+  inflation_radius: 0.4
   #update frequency of the costmap
   update_frequency: 5.0
   #costmap should/n't initialize itself based on a map served by the map_server
   static_map: true
+  #toleracja
+  transform_tolerance: 0.05

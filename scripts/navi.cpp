@@ -14,6 +14,42 @@ void my_callback(const std_msgs::StringConstPtr& str)
     printf("Current i = %2.2f", i);
 }
 
+// void goal_callback(const geometry_msgs::PoseStamped::SharedPtr msg){
+//     // ROS_INFO_STREAM("Received pose: " << msg);
+//     // msg->pose.pose.position.x
+//     // msg->pose.pose.position.y
+//     // msg->pose.pose.position.theta
+
+//     //position in map frame
+//     double tx = msg->pose.position.x;
+//     double ty = msg->pose.position.y;
+
+//     //orientation quaternion
+//     tf2::Quaternion q(
+//                 msg->pose.orientation.x,
+//                 msg->pose.orientation.y,
+//                 msg->pose.orientation.z,
+//                 msg->pose.orientation.w);
+
+//     // 3x3 Rotation matrix from quaternion
+//     tf2::Matrix3x3 m(q);
+
+//     // Roll Pitch and Yaw from rotation matrix
+//     double roll, pitch, yaw;
+//     m.getRPY(roll, pitch, yaw);
+
+//     // Output the measure
+//     RCLCPP_INFO(get_logger(), "Received pose in '%s' frame : X: %.2f Y: %.2f - R: %.2f P: %.2f Y: %.2f - Timestamp: %u.%u sec ",
+//                 msg->header.frame_id.c_str(),
+//                 tx, ty,
+//                 roll, pitch, yaw ,
+//                 msg->header.stamp.sec,msg->header.stamp.nanosec);
+// }
+
+// void g_costmap_callback(const geometry_msgs::PoseStamped::SharedPtr msg){
+
+// }
+
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "navi");
@@ -21,6 +57,9 @@ int main(int argc, char **argv)
     // topic is '/key_vel' i guess. or '/nav_vel'???
     // position is maybe '/ground_truth_odom'?
     // '/input_joy/cmd_vel' another vel???
+    // Subscriber 
+    //ros::Subscriber goal_sub = n.subscribe("move_base_simple/goal", 1000, goal_callback);
+    //ros::Subscriber g_costmap_sub = n.subscribe("map", 1000, g_costmap_callback);
     ros::Publisher pub_vel = n.advertise<geometry_msgs::Twist>("key_vel", 1000); // set the right topic to publish velocity
     // ros::Subscriber sub = n.subscribe("some_topic", 1000, my_callback);
     ros::Rate loop_rate(10);

@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: stero_mobile_init
+Description: Description of stero_mobile_init
+Version: 1.2.4
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
