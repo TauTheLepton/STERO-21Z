@@ -1,23 +1,23 @@
 <launch>
-    <arg name="map" default="moja_mapa.yaml"/>
-    <arg name="world" default="moj_swiat"/>
 
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find stero_mobile_init)/maps/$(arg map)"/> <!-- adds map server to host our map -->
-    <node name="fake_global_loc" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 map odom 10"/> <!-- fooling system, there is some global localization -->
-    <!-- loading params -->
-    <node name="navi" pkg="stero_mobile_init" type="navi">
-        <!-- costmap params -->
-        <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_local"/>
-        <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_global"/>
-        <rosparam file="$(find stero_mobile_init)/navi_param/global_costmap_params.yaml" command="load"/>
-        <rosparam file="$(find stero_mobile_init)/navi_param/local_costmap_params.yaml" command="load"/>
-        <!-- planner params -->
-        <rosparam file="$(find stero_mobile_init)/navi_param/global_planner_params.yaml" command="load"/>
-        <rosparam file="$(find stero_mobile_init)/navi_param/local_planner_params.yaml" command="load"/>
-    </node>
+    <!-- declaring args -->
+    <arg name="linear" default="0.11"/> 
+    <arg name="angular" default="0.1"/> 
+    <arg name="multiplier" default="1"/> 
+    <arg name="direction" default="1"/> 
+    <arg name="odom" default="False"/> 
+    <arg name="delay" default="10"/> 
+    
+    <param name="/use_sim_time" value="True" />
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find navigation_pkg)/maps/moja_mapa.yaml" />
+    <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom 100" />
     <include file="$(find stero_mobile_init)/launch/tiago_simple.launch" >
-        <arg name="world" value="$(arg world)" />
+        <arg name="world" value="moj_swiat" />
     </include>
+
+
+     <!--- Run AMCL --> 
     <remap from="/scan" to="/scan_raw"/>
     <remap from="/cmd_vel" to="/mobile_base_controller/cmd_vel"/>
     <remap from="/odom" to="/mobile_base_controller/odom"/>
@@ -55,4 +55,14 @@
         <param name="recovery_alpha_slow" value="0.0"/>
         <param name="recovery_alpha_fast" value="0.0"/>
     </node>
+
+    <!-- read params -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find navigation_pkg)/configs/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+        <rosparam file="$(find navigation_pkg)/configs/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find navigation_pkg)/configs/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find navigation_pkg)/configs/global_costmap_params.yaml" command="load" /> 
+        <rosparam file="$(find navigation_pkg)/configs/base_local_planner_params.yaml" command="load" />
+    </node>
+
 </launch>
