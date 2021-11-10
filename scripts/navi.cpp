@@ -135,13 +135,13 @@ int main(int argc, char **argv)
                 // if new one is given, in this part the plan will be generated
                 pose_start = odom2pose(pose_current); // convert pose_current which is Odometry to PoseStamped
                 pose_start.header.frame_id = "map"; // change frame_id to "map" but not shure if it is right
-                planner_global.makePlan(pose_start, pose_goal, plan); // global planner makes plan
-                bool plan_status = planner_local.setPlan(plan); // plan from global planner is passed to the local planner
-                if (plan_status) { // could add more conditions like 'did_make_plan' or sth
+                bool make_plan_status = planner_global.makePlan(pose_start, pose_goal, plan); // global planner makes plan
+                bool set_plan_status = planner_local.setPlan(plan); // plan from global planner is passed to the local planner
+                if (make_plan_status && set_plan_status) {
                     // when everything was calculated correctly moves on to moving
                     is_going = true;
                     received_goal = false;
-                }
+                } else ROS_INFO("Problem with making and setting plan");
             }
         } else {
             // check if local planner found a trajectory
