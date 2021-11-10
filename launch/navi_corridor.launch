@@ -17,7 +17,11 @@
         <rosparam file="$(find stero_mobile_init)/navi_param/global_costmap_params.yaml" command="load" ns="costmap_global" /> 
         <!-- planners -->
         <rosparam file="$(find stero_mobile_init)/navi_param/local_planner_params.yaml" command="load" ns="planner_local" />
-        <rosparam file="$(find stero_mobile_init)/navi_param/global_planner_params.yaml" command="load" ns="planner_global" />
+    </node>
+    <remap from="/scan" to="/scan_raw"/>
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <param name="max_particles" value="500" />
+        <param name="min_particles" value="100" />
     </node>
 
 </launch>

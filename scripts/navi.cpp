@@ -8,6 +8,7 @@
 #include "geometry_msgs/PoseStamped.h"
 #include "rotate_recovery/rotate_recovery.h"
 #include "nav_msgs/Odometry.h"
+#include "base_local_planner/trajectory_planner_ros.h"
 
 // definition of poses
 nav_msgs::Odometry pose_current;
@@ -113,45 +114,53 @@ int main(int argc, char **argv)
 
     // rcovery behavior for when local planner gets stuck
     rotate_recovery::RotateRecovery recovery;
-    recovery.initialize("recovery", &buf, &costmap_global, &costmap_local);
+
 
     // initialization of local planer
-    dwa_local_planner::DWAPlannerROS planner_local;
+    // dwa_local_planner::DWAPlannerROS planner_local;
+    // planner_local.initialize("planner_local", &buf, &costmap_local);
+
+    base_local_planner::TrajectoryPlannerROS planner_local;
     planner_local.initialize("planner_local", &buf, &costmap_local);
 
     // initialization of global planer, idk which is better is better/the right one
 
-    // global_planner::GlobalPlanner planner_global;
-    // planner_global.initialize("planner_global", &costmap_global);
+    global_planner::GlobalPlanner planner_global;
+    planner_global.initialize("planner_global", &costmap_global);
 
-    global_planner::GlobalPlanner planner_global("planner_global", costmap_global.getCostmap(), "map");
+    // global_planner::GlobalPlanner planner_global("planner_global", costmap_global.getCostmap(), "map");
 
     int count = 0;
     while (ros::ok())
     {
+        if (received_goal) {
+            // if new one is given, in this part the plan will be generated
+            pose_start = odom2pose(pose_current); // convert pose_current which is Odometry to PoseStamped
+            pose_start.header.frame_id = "map"; // change frame_id to "map" but not shure if it is right
+            bool make_plan_status = planner_global.makePlan(pose_start, pose_goal, plan); // global planner makes plan
+            bool set_plan_status = planner_local.setPlan(plan); // plan from global planner is passed to the local planner
+            if (make_plan_status && set_plan_status) {
+                // when everything was calculated correctly moves on to moving
+                is_going = true;
+                received_goal = false;
+            } else ROS_INFO("Problem with making and setting plan");
+        }
         if (!is_going) {
             // happens when goal is reached, so there is no new goal
-            if (received_goal) {
-                // if new one is given, in this part the plan will be generated
-                pose_start = odom2pose(pose_current); // convert pose_current which is Odometry to PoseStamped
-                pose_start.header.frame_id = "map"; // change frame_id to "map" but not shure if it is right
-                bool make_plan_status = planner_global.makePlan(pose_start, pose_goal, plan); // global planner makes plan
-                bool set_plan_status = planner_local.setPlan(plan); // plan from global planner is passed to the local planner
-                if (make_plan_status && set_plan_status) {
-                    // when everything was calculated correctly moves on to moving
-                    is_going = true;
-                    received_goal = false;
-                } else ROS_INFO("Problem with making and setting plan");
-            }
+            
         } else {
             // check if local planner found a trajectory
             bool found_trajectory = planner_local.computeVelocityCommands(vel); // could use dwaComputeVelocityCommands(), but needs 2 arguments
             if (found_trajectory) {
                 // if it did publish instructions
                 pub_vel.publish(vel);
+                ROS_INFO("Proceeding to target");
             } else {
                 // if it didn't run recovery
+                recovery.initialize("recovery", &buf, &costmap_global, &costmap_local);
                 recovery.runBehavior();
+
+                ROS_INFO("Recovery behavior");
             }
             reached_goal = planner_local.isGoalReached(); // check if local planner has reached a goal
             if (reached_goal) is_going = false;
