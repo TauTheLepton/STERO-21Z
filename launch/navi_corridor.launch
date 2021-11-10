@@ -1,17 +1,21 @@
 <launch>
-
+    <!-- run map server with the right map hosted -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find stero_mobile_init)/maps/moja_mapa_korytarz.yaml" />
+    <!-- fool system there is glogal localization -->
     <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom 100" />
+    <!-- launh basic tiago launcher with all tiago things and set up the rigt world there -->
     <include file="$(find stero_mobile_init)/launch/tiago_simple.launch" >
         <arg name="world" value="corridor" />
     </include>
 
-    <!-- read params -->
+    <!-- read params for costmaps and planners -->
     <node pkg="stero_mobile_init" type="navi" respawn="false" name="navi" output="screen">
+        <!-- costmaps -->
         <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_local" /> 
         <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_global" />
         <rosparam file="$(find stero_mobile_init)/navi_param/local_costmap_params.yaml" command="load" ns="costmap_local" />
         <rosparam file="$(find stero_mobile_init)/navi_param/global_costmap_params.yaml" command="load" ns="costmap_global" /> 
+        <!-- planners -->
         <rosparam file="$(find stero_mobile_init)/navi_param/local_planner_params.yaml" command="load" ns="planner_local" />
         <rosparam file="$(find stero_mobile_init)/navi_param/global_planner_params.yaml" command="load" ns="planner_global" />
     </node>

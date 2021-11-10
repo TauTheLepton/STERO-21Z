@@ -5,15 +5,6 @@ find_package(catkin REQUIRED
     COMPONENTS
     std_msgs
     tf2_ros
-    # without things below i get many lines like this:
-    # navi.cpp:(.text+0x6fc): undefined reference to `dwa_local_planner::DWAPlannerROS::DWAPlannerROS()'
-
-    # and with these things i get many lines like this:
-    # CMake Error at /home/mpalczuk/mobile_ws/build/navigation/navfn/cmake/navfn-genmsg.cmake:221 (add_custom_target):
-    # add_custom_target cannot create target "navfn_generate_messages_py" because
-    # another target with the same name already exists.  The existing target is a
-    # custom target created in source directory
-
     costmap_2d
     dwa_local_planner
     global_planner
