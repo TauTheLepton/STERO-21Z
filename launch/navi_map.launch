@@ -8,12 +8,12 @@
 
     <!-- read params -->
     <node pkg="stero_mobile_init" type="navi" respawn="false" name="navi" output="screen">
-        <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
-        <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find stero_mobile_init)/navi_param/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find stero_mobile_init)/navi_param/global_costmap_params.yaml" command="load" /> 
-        <rosparam file="$(find stero_mobile_init)/navi_param/local_planner_params.yaml" command="load" />
-        <rosparam file="$(find stero_mobile_init)/navi_param/global_planner_params.yaml" command="load" />
+        <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_local" /> 
+        <rosparam file="$(find stero_mobile_init)/navi_param/costmap_common_params.yaml" command="load" ns="costmap_global" />
+        <rosparam file="$(find stero_mobile_init)/navi_param/local_costmap_params.yaml" command="load" ns="costmap_local" />
+        <rosparam file="$(find stero_mobile_init)/navi_param/global_costmap_params.yaml" command="load" ns="costmap_global" /> 
+        <rosparam file="$(find stero_mobile_init)/navi_param/local_planner_params.yaml" command="load" ns="planner_local" />
+        <rosparam file="$(find stero_mobile_init)/navi_param/global_planner_params.yaml" command="load" ns="planner_global" />
     </node>
 
 </launch>
