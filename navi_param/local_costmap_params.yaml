@@ -11,7 +11,7 @@ static_map: false
 #true - costmap will remain centered around the robot while it moves
 rolling_window: true
 #defining size of the local costmap
-width: 3.0
-height: 3.0
+width: 6.0
+height: 6.0
 #real size in pixels / pixaleted size
 resolution: 0.05
