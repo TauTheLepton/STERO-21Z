@@ -158,10 +158,9 @@ int main(int argc, char **argv)
                 ROS_INFO("Proceeding to target");
             } else {
                 // if it didn't run recovery
-                
+                ROS_INFO("Recovery behavior 1");
                 recovery.runBehavior();
-
-                ROS_INFO("Recovery behavior");
+                ROS_INFO("Recovery behavior 2");
             }
             reached_goal = planner_local.isGoalReached(); // check if local planner has reached a goal
             if (reached_goal) is_going = false;

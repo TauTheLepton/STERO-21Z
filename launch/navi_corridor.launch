@@ -19,9 +19,9 @@
         <rosparam file="$(find stero_mobile_init)/navi_param/local_planner_params.yaml" command="load" ns="planner_local" />
     </node>
     <remap from="/scan" to="/scan_raw"/>
-    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <!-- <node pkg="amcl" type="amcl" name="amcl" output="screen">
         <param name="max_particles" value="500" />
         <param name="min_particles" value="100" />
-    </node>
+    </node> -->
 
 </launch>
