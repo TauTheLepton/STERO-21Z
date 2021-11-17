@@ -30,43 +30,6 @@ void get_goal_callback(const geometry_msgs::PoseStamped::ConstPtr& pose)
     received_goal = true;
 }
 
-// alternative callback for sub_goal
-// void goal_callback(const geometry_msgs::PoseStamped::SharedPtr msg){
-//     // ROS_INFO_STREAM("Received pose: " << msg);
-//     // msg->pose.pose.position.x
-//     // msg->pose.pose.position.y
-//     // msg->pose.pose.position.theta
-
-//     //position in map frame
-//     double tx = msg->pose.position.x;
-//     double ty = msg->pose.position.y;
-
-//     //orientation quaternion
-//     tf2::Quaternion q(
-//                 msg->pose.orientation.x,
-//                 msg->pose.orientation.y,
-//                 msg->pose.orientation.z,
-//                 msg->pose.orientation.w);
-
-//     // 3x3 Rotation matrix from quaternion
-//     tf2::Matrix3x3 m(q);
-
-//     // Roll Pitch and Yaw from rotation matrix
-//     double roll, pitch, yaw;
-//     m.getRPY(roll, pitch, yaw);
-
-//     // Output the measure
-//     RCLCPP_INFO(get_logger(), "Received pose in '%s' frame : X: %.2f Y: %.2f - R: %.2f P: %.2f Y: %.2f - Timestamp: %u.%u sec ",
-//                 msg->header.frame_id.c_str(),
-//                 tx, ty,
-//                 roll, pitch, yaw ,
-//                 msg->header.stamp.sec,msg->header.stamp.nanosec);
-// }
-
-// void g_costmap_callback(const geometry_msgs::PoseStamped::SharedPtr msg){
-
-// }
-
 // onversion from type nav_msgs::Odometry to geometry_msgs::PoseStamped
 geometry_msgs::PoseStamped odom2pose(nav_msgs::Odometry odom)
 {
