@@ -113,9 +113,15 @@ int main(int argc, char **argv)
                 ROS_INFO("Proceeding to target");
             } else {
                 // if it didn't run recovery
-                ROS_INFO("Recovery behavior 1");
-                recovery.runBehavior();
-                ROS_INFO("Recovery behavior 2");
+                // 1
+                // ROS_INFO("Recovery behavior 1");
+                // recovery.runBehavior();
+                // ROS_INFO("Recovery behavior 2");
+                // 2
+                vel.angular.z = 1.0;
+                vel.linear.x = 0.0;
+                pub_vel.publish(vel);
+                ROS_INFO("Rotate Recovery behavior started");
             }
             reached_goal = planner_local.isGoalReached(); // check if local planner has reached a goal
             if (reached_goal) is_going = false;
