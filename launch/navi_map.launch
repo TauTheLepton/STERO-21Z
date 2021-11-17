@@ -21,6 +21,12 @@
     <remap from="/scan" to="/scan_raw"/>
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
         <param name="max_particles" value="500" />
-        <param name="min_particles" value="100" />
+        <param name="min_particles" value="5000" />
+        <param name="update_min_d" value="0.1"/>
+        <param name="update_min_a" value="0.25"/>
+        <param name="resample_interval" value="1"/>
+        <param name="recovery_alpha_slow" value="0.001"/>
+        <param name="recovery_alpha_fast" value="0.1"/>
+        <param name="gui_publish_rate" value="10"/>
     </node>
 </launch>
