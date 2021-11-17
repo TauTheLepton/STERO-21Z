@@ -8,7 +8,7 @@ find_package(catkin REQUIRED
     costmap_2d
     dwa_local_planner
     global_planner
-    rotate_recovery
+    clear_costmap_recovery
 )
 catkin_package(
     # INCLUDE_DIRS include

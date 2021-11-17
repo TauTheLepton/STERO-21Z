@@ -6,9 +6,9 @@
 #include "global_planner/planner_core.h"
 #include <sstream>
 #include "geometry_msgs/PoseStamped.h"
-#include "rotate_recovery/rotate_recovery.h"
 #include "nav_msgs/Odometry.h"
 #include "base_local_planner/trajectory_planner_ros.h"
+#include "clear_costmap_recovery/clear_costmap_recovery.h"
 
 // definition of poses
 nav_msgs::Odometry pose_current;
@@ -72,10 +72,11 @@ int main(int argc, char **argv)
     tf2_ros::TransformListener tf(buf); // idk if this is needed
     costmap_2d::Costmap2DROS costmap_local("costmap_local", buf);
     costmap_2d::Costmap2DROS costmap_global("costmap_global", buf);
+    costmap_2d::Costmap2DROS costmap_global_fake("costmap_global_fake", buf); // fake costmap for costmap clearing so it clears only local one
 
-    // rcovery behavior for when local planner gets stuck
-    rotate_recovery::RotateRecovery recovery;
-    recovery.initialize("recovery", &buf, &costmap_global, &costmap_local);
+    // costmap clearing for recovery behavior
+    clear_costmap_recovery::ClearCostmapRecovery clear_costmap;
+    clear_costmap.initialize("clear_costmap", &buf, &costmap_global_fake, &costmap_local);
 
     base_local_planner::TrajectoryPlannerROS planner_local;
     planner_local.initialize("planner_local", &buf, &costmap_local);
@@ -104,25 +105,21 @@ int main(int argc, char **argv)
         }
         if (!is_going) {
             // happens when goal is reached, so there is no new goal
+            ROS_INFO("Goal reached, no new goal selected");
         } else {
             // check if local planner found a trajectory
             bool found_trajectory = planner_local.computeVelocityCommands(vel);
             if (found_trajectory) {
                 // if it did publish instructions
-                pub_vel.publish(vel);
                 ROS_INFO("Proceeding to target");
             } else {
                 // if it didn't run recovery
-                // 1
-                // ROS_INFO("Recovery behavior 1");
-                // recovery.runBehavior();
-                // ROS_INFO("Recovery behavior 2");
-                // 2
                 vel.angular.z = 1.0;
                 vel.linear.x = 0.0;
-                pub_vel.publish(vel);
+                clear_costmap.runBehavior();
                 ROS_INFO("Rotate Recovery behavior started");
             }
+            pub_vel.publish(vel);// publish valculated velocity
             reached_goal = planner_local.isGoalReached(); // check if local planner has reached a goal
             if (reached_goal) is_going = false;
         }
