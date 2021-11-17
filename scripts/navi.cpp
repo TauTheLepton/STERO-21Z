@@ -30,43 +30,6 @@ void get_goal_callback(const geometry_msgs::PoseStamped::ConstPtr& pose)
     received_goal = true;
 }
 
-// alternative callback for sub_goal
-// void goal_callback(const geometry_msgs::PoseStamped::SharedPtr msg){
-//     // ROS_INFO_STREAM("Received pose: " << msg);
-//     // msg->pose.pose.position.x
-//     // msg->pose.pose.position.y
-//     // msg->pose.pose.position.theta
-
-//     //position in map frame
-//     double tx = msg->pose.position.x;
-//     double ty = msg->pose.position.y;
-
-//     //orientation quaternion
-//     tf2::Quaternion q(
-//                 msg->pose.orientation.x,
-//                 msg->pose.orientation.y,
-//                 msg->pose.orientation.z,
-//                 msg->pose.orientation.w);
-
-//     // 3x3 Rotation matrix from quaternion
-//     tf2::Matrix3x3 m(q);
-
-//     // Roll Pitch and Yaw from rotation matrix
-//     double roll, pitch, yaw;
-//     m.getRPY(roll, pitch, yaw);
-
-//     // Output the measure
-//     RCLCPP_INFO(get_logger(), "Received pose in '%s' frame : X: %.2f Y: %.2f - R: %.2f P: %.2f Y: %.2f - Timestamp: %u.%u sec ",
-//                 msg->header.frame_id.c_str(),
-//                 tx, ty,
-//                 roll, pitch, yaw ,
-//                 msg->header.stamp.sec,msg->header.stamp.nanosec);
-// }
-
-// void g_costmap_callback(const geometry_msgs::PoseStamped::SharedPtr msg){
-
-// }
-
 // onversion from type nav_msgs::Odometry to geometry_msgs::PoseStamped
 geometry_msgs::PoseStamped odom2pose(nav_msgs::Odometry odom)
 {
@@ -104,8 +67,6 @@ int main(int argc, char **argv)
     bool reached_goal = true;
     bool is_going= false;
 
-    // sth here didn't want to work, and I had to paste this line to command line:
-    // sudo ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
     // setting up costmaps
     tf2_ros::Buffer buf(ros::Duration(10));
     tf2_ros::TransformListener tf(buf); // idk if this is needed
@@ -116,19 +77,14 @@ int main(int argc, char **argv)
     rotate_recovery::RotateRecovery recovery;
     recovery.initialize("recovery", &buf, &costmap_global, &costmap_local);
 
-
-    // initialization of local planer
-    // dwa_local_planner::DWAPlannerROS planner_local;
-    // planner_local.initialize("planner_local", &buf, &costmap_local);
-
     base_local_planner::TrajectoryPlannerROS planner_local;
     planner_local.initialize("planner_local", &buf, &costmap_local);
 
-    // initialization of global planer, idk which is better is better/the right one
-
+    // initialization of global planer, idk which is better is the right one
+    // 1
     global_planner::GlobalPlanner planner_global;
     planner_global.initialize("planner_global", &costmap_global);
-
+    // 2
     // global_planner::GlobalPlanner planner_global("planner_global", costmap_global.getCostmap(), "map");
 
     int count = 0;
@@ -148,10 +104,9 @@ int main(int argc, char **argv)
         }
         if (!is_going) {
             // happens when goal is reached, so there is no new goal
-            
         } else {
             // check if local planner found a trajectory
-            bool found_trajectory = planner_local.computeVelocityCommands(vel); // could use dwaComputeVelocityCommands(), but needs 2 arguments
+            bool found_trajectory = planner_local.computeVelocityCommands(vel);
             if (found_trajectory) {
                 // if it did publish instructions
                 pub_vel.publish(vel);
@@ -165,13 +120,10 @@ int main(int argc, char **argv)
             reached_goal = planner_local.isGoalReached(); // check if local planner has reached a goal
             if (reached_goal) is_going = false;
         }
-        // ROS_INFO("%s", msg.data.c_str());
-
         // basics needed for publishing/subscribing and while loop tooperate smoothly
         ros::spinOnce();
         loop_rate.sleep();
         ++count;
     }
-
     return 0;
 }
