@@ -64,14 +64,21 @@ if __name__ == "__main__":
 
     # goal position
     q_map_goal = {'torso_0_joint':0,
-        'right_arm_0_joint':-0.3, 'right_arm_1_joint':-1.8, 'right_arm_2_joint':-1.25,
+        'right_arm_0_joint':0.3, 'right_arm_1_joint':1.8, 'right_arm_2_joint':-1.25,
         'right_arm_3_joint':2.0, 'right_arm_4_joint':0, 'right_arm_5_joint':-0.5,
         'right_arm_6_joint':0,
-        'left_arm_0_joint':0.3, 'left_arm_1_joint':1.8, 'left_arm_2_joint':-1.25,
+        'left_arm_0_joint':-0.3, 'left_arm_1_joint':-1.8, 'left_arm_2_joint':-1.25,
         'left_arm_3_joint':-0.85, 'left_arm_4_joint':0, 'left_arm_5_joint':0.5,
         'left_arm_6_joint':0 }
 
     # intermediate position
+    # q_map_intermediate = {'torso_0_joint':0,
+    #     'right_arm_0_joint':-0.3, 'right_arm_1_joint':-1.6, 'right_arm_2_joint':-1.25,
+    #     'right_arm_3_joint':-0.85, 'right_arm_4_joint':0, 'right_arm_5_joint':-0.5,
+    #     'right_arm_6_joint':0,
+    #     'left_arm_0_joint':0.3, 'left_arm_1_joint':1.8, 'left_arm_2_joint':-1.25,
+    #     'left_arm_3_joint':-0.85, 'left_arm_4_joint':0, 'left_arm_5_joint':0.5,
+    #     'left_arm_6_joint':0 }
     q_map_intermediate = {'torso_0_joint':0,
         'right_arm_0_joint':-0.3, 'right_arm_1_joint':-1.6, 'right_arm_2_joint':-1.25,
         'right_arm_3_joint':-0.85, 'right_arm_4_joint':0, 'right_arm_5_joint':-0.5,

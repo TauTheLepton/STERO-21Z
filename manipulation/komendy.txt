@@ -1,0 +1,10 @@
+panel sterowania:
+rosrun rqt_velma velma_control_panel.py
+czyszczeie, trzeba robić zawsze dla bezpieczeństwa:
+rosrun velma_common reset_shm_comm.py
+
+# mapa zajętości przestrzeni
+włączanielaunch w instrukcji 
+by topic free cels
+merged_cells_*_array ??
+optomapa może być zapisana do pliku, żeby było szybciej - jest w instrukcji
