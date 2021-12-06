@@ -197,55 +197,55 @@ if __name__ == "__main__":
     if not isHeadConfigurationClose( velma.getHeadCurrentConfiguration(), q_dest, 0.1 ):
         exitError(24)
 
-
-    print("moving arms up")
-    velma.moveJoint(q_arms_up, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
-    velma.waitForJoint()
+    # Further arms movement was implemented not needed in tahat case
+    # print("moving arms up")
+    # velma.moveJoint(q_arms_up, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
+    # velma.waitForJoint()
  
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    # I dont know how to check it
-    # if not isConfigurationClose(q_arms_up, js[0], tolerance=0.1):
-    #     exitError(25)
+    # rospy.sleep(0.5)
+    # js = velma.getLastJointState()
+    # # I dont know how to check it
+    # # if not isConfigurationClose(q_arms_up, js[0], tolerance=0.1):
+    # #     exitError(25)
 
-    print("moving torso to the left (max)")
-    velma.moveJoint(q_torso_left, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
-    velma.waitForJoint()
+    # print("moving torso to the left (max)")
+    # velma.moveJoint(q_torso_left, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
+    # velma.waitForJoint()
  
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    # I dont kwon how to chek it
-    # if not isConfigurationClose(q_torso_left, js[0], tolerance=0.1):
-    #     exitError(26)
+    # rospy.sleep(0.5)
+    # js = velma.getLastJointState()
+    # # I dont kwon how to chek it
+    # # if not isConfigurationClose(q_torso_left, js[0], tolerance=0.1):
+    # #     exitError(26)
 
-    print("moving torso to the right (max)")
-    velma.moveJoint(q_torso_right, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
-    velma.waitForJoint()
+    # print("moving torso to the right (max)")
+    # velma.moveJoint(q_torso_right, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
+    # velma.waitForJoint()
  
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    # I dont know how to check it
-    # if not isConfigurationClose(q_torso_right, js[0], tolerance=0.1):
-    #     exitError(27)
+    # rospy.sleep(0.5)
+    # js = velma.getLastJointState()
+    # # I dont know how to check it
+    # # if not isConfigurationClose(q_torso_right, js[0], tolerance=0.1):
+    # #     exitError(27)
 
-    print("moving torso to the front")
-    velma.moveJoint(q_torso_0, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
-    velma.waitForJoint()
+    # print("moving torso to the front")
+    # velma.moveJoint(q_torso_0, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
+    # velma.waitForJoint()
  
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    # I dont know how to check it
-    # if not isConfigurationClose(q_torso_0, js[0], tolerance=0.1):
-    #     exitError(28)
+    # rospy.sleep(0.5)
+    # js = velma.getLastJointState()
+    # # I dont know how to check it
+    # # if not isConfigurationClose(q_torso_0, js[0], tolerance=0.1):
+    # #     exitError(28)
 
-    print("moving arms down")
-    velma.moveJoint(q_arms_down, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
-    velma.waitForJoint()
+    # print("moving arms down")
+    # velma.moveJoint(q_arms_down, 9.0, start_time=0.5, position_tol=15.0/180.0*math.pi)
+    # velma.waitForJoint()
  
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    # I dont know how to check it
-    # if not isConfigurationClose(q_arms_down, js[0], tolerance=0.1):
-    #     exitError(29)
+    # rospy.sleep(0.5)
+    # js = velma.getLastJointState()
+    # # I dont know how to check it
+    # # if not isConfigurationClose(q_arms_down, js[0], tolerance=0.1):
+    # #     exitError(29)
 
     exitError(0)
