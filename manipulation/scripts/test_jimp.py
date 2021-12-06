@@ -86,6 +86,43 @@ if __name__ == "__main__":
         'left_arm_0_joint':0.3, 'left_arm_1_joint':1.8, 'left_arm_2_joint':-1.25,
         'left_arm_3_joint':-0.85, 'left_arm_4_joint':0, 'left_arm_5_joint':0.5,
         'left_arm_6_joint':0 }
+    
+    # MY CONFIGURATIONS
+    # pozycja pierwsza do ominięcia stolika przed chwyceniem
+    q_map_my1 = {'torso_0_joint':-0.20245755137580862,
+        'right_arm_0_joint':-0.040549221602448324, 'right_arm_1_joint':-1.939690065039993, 'right_arm_2_joint':2.20424097358419,
+        'right_arm_3_joint':1.30317927455409, 'right_arm_4_joint':0.13618581972101784, 'right_arm_5_joint':-1.7205597887661666,
+        'right_arm_6_joint':0.88517640014791}
+
+    # pozycja przed złapaniem
+    q_map_my2 = {'torso_0_joint':0.4963280397467873,
+        'right_arm_0_joint':0.06471796460146129, 'right_arm_1_joint':-1.6963078134386786, 'right_arm_2_joint':2.7565891151139,
+        'right_arm_3_joint':0.922547506515648, 'right_arm_4_joint':0.06210539575890758, 'right_arm_5_joint':-1.724952784130839,
+        'right_arm_6_joint':0.7009604448356849}
+
+    # pozycja z podniesioną szklanką
+    q_map_my3 = {'torso_0_joint':0.49018119426368545,
+        'right_arm_0_joint':-0.2134625908039628, 'right_arm_1_joint':-1.4318168216868312, 'right_arm_2_joint':2.316593354814221,
+        'right_arm_3_joint':1.3099906386836455, 'right_arm_4_joint':0.541827047550822, 'right_arm_5_joint':-1.58827008358729,
+        'right_arm_6_joint':0.35938230459677123}
+
+    # pozycja podniesiona przed postawieniem
+    q_map_my4 = {'torso_0_joint':0.8479370067212796,
+        'right_arm_0_joint':0.48334617371245836, 'right_arm_1_joint':-1.4851888455833246, 'right_arm_2_joint':2.5712990063348475,
+        'right_arm_3_joint':0.6432216068598393, 'right_arm_4_joint':0.020589908266191514, 'right_arm_5_joint':-1.6606441274634018,
+        'right_arm_6_joint':1.1198170046419729}
+
+    # pozycja tuz przed odstawieniam
+    q_map_my5 = {'torso_0_joint':1.0233153675786633,
+        'right_arm_0_joint':0.2431345866287985, 'right_arm_1_joint':-1.5587057734937435, 'right_arm_2_joint':2.7013997674575005,
+        'right_arm_3_joint':0.658877630907585, 'right_arm_4_joint':0.009169826491319477, 'right_arm_5_joint':-1.7421822861349991,
+        'right_arm_6_joint':1.0766135827339551}
+
+    # pozycja po odstawieniu odsunieta
+    q_map_my6 = {'torso_0_joint':0.8835198391548271,
+        'right_arm_0_joint':0.14680695040294273, 'right_arm_1_joint':-1.6231777877950013, 'right_arm_2_joint':2.820061704034955,
+        'right_arm_3_joint':0.7827351777338659, 'right_arm_4_joint':0.16126986744042832, 'right_arm_5_joint':-1.7425074959320823,
+        'right_arm_6_joint':1.4308674622506423}
 
     rospy.init_node('test_jimp')
 

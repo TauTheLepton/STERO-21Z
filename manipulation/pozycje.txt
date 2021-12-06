@@ -1,0 +1,257 @@
+# pozycja pierwsza do ominięcia stolika przed chwyceniem:
+
+header: 
+  seq: 17075
+  stamp: 
+    secs: 234
+    nsecs: 104000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [-0.20245755137580862, -0.040549221602448324, -1.939690065039993, 2.20424097358419, 1.30317927455409, 0.13618581972101784, -1.7205597887661666, 0.88517640014791, 0.40691602475718414, 1.7526784044835406, -1.1731185387574148, -0.8924634384370934, -0.40049615070355, 0.6363623703576037, 0.19050266117195191, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [-3.276699467793695e-05, 4.462403331927865e-05, 1.1998426829335428e-05, -4.127686649379374e-05, -4.038452530103105e-05, 7.977080883292409e-06, -1.7397451676885722e-06, -2.4291713264316603e-05, -0.00046770520945637196, -0.0011384988804977996, 0.0025266643654259517, -1.8917129926674527e-05, -0.0042379369727633485, 0.0004958521298016011, 0.0020046157553513834, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+^Cheader: 
+  seq: 17076
+  stamp: 
+    secs: 234
+    nsecs: 114000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [-0.2024578547739075, -0.04054879353641812, -1.939689951922111, 2.2042405726742307, 1.303178856205049, 0.13618588198565468, -1.7205598087471679, 0.8851761634677099, 0.4069113376043315, 1.7526670188695346, -1.1730932674451742, -0.892463620793167, -0.4005385263151376, 0.6363673208026783, 0.19052270477702096, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [-3.0643207985848445e-05, 4.157606378026241e-05, 1.0855051514134582e-05, -3.928374204277031e-05, -4.2719112781125675e-05, 5.075521070797839e-06, -2.1707547027509377e-06, -2.3221152209149717e-05, -0.00046935682148991286, -0.0011385967561724694, 0.002527453260072134, -1.777940763092204e-05, -0.004237286493006997, 0.0004945307559375465, 0.0020041862474569367, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+
+# pozycja przed złapaniem:
+
+header: 
+  seq: 21897
+  stamp: 
+    secs: 282
+    nsecs: 586000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.4963280397467873, 0.06471796460146129, -1.6963078134386786, 2.7565891151139, 0.922547506515648, 0.06210539575890758, -1.724952784130839, 0.7009604448356849, -0.18202009962166174, 1.7857728651566396, -0.7230771242870571, -0.6377419214196548, -0.22192282885259804, 0.519184145336966, -0.032437777163456236, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [0.0003877427703555873, -0.0004045833545487987, 2.5049739544442473e-05, 9.416080893525215e-05, 0.00014849459345607735, 0.0004055775886212115, -2.760608098230713e-06, 9.252564449581868e-06, -0.0010553506479820723, -0.00035711360570357236, 0.002817456869410218, 0.00046050793078328413, -0.003939751171626281, 0.0003336485107325593, 0.0013808785426423446, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+header: 
+  seq: 21898
+  stamp: 
+    secs: 282
+    nsecs: 598000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.4963325907182704, 0.06471312275108868, -1.696307522709836, 2.756590229491543, 0.9225492807125597, 0.06211019979762211, -1.7249528117297634, 0.7009605554768775, -0.18203275667097002, 1.7857685673777388, -0.7230433736700932, -0.6377364237859585, -0.22197014456064976, 0.5191882135246764, -0.03242116880278406, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [0.00037985441978497284, -0.0004027407827005853, 2.3686869629417227e-05, 9.180746491172182e-05, 0.0001472115582144384, 0.0003959975884961636, -2.1066561223578167e-06, 9.002902620153025e-06, -0.001054357132047437, -0.0003589156143010003, 0.0028088731503244277, 0.00045634611684573366, -0.003945349562007913, 0.00034247403353663934, 0.0013865557941309106, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+
+# pozycja z podniesioną szklanką
+
+header: 
+  seq: 34589
+  stamp: 
+    secs: 410
+    nsecs:  96000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.49018119426368545, -0.2134625908039628, -1.4318168216868312, 2.316593354814221, 1.3099906386836455, 0.541827047550822, -1.58827008358729, 0.35938230459677123, -0.2441338040109391, 1.7375674836225838, -0.492986757995806, -0.6414568955351304, -0.5993282244803828, 0.5519212959003127, 0.12042986495852716, 0.0, 0.0, 0.0007012483601762931, 1.803133056928056, 0.6380971469137999, 0.0007012483601762931, 1.820620437909952, 0.6422900277340211, 0.3112447018619966, 0.38034746839466893, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [6.371360076265519e-05, -0.001483135866158372, 0.0014703539195708984, -0.0026600265802920065, -0.0002253825085423199, 0.002640119831883134, -0.0006937840537509787, -0.0019507869571208508, -0.00046760535404499537, -0.0001884766345542372, 0.0013574140449363885, 2.1091089842240518e-05, -0.0019882127886433065, 0.000271245309584698, 0.0007110943033324007, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+^Cheader: 
+  seq: 34590
+  stamp: 
+    secs: 410
+    nsecs: 106000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.4901818010598832, -0.21347753512014225, -1.4318023453632747, 2.3165667947493036, 1.3099883592744324, 0.5418534200995778, -1.5882774182516646, 0.35936294763862925, -0.24413851080572999, 1.737565617501761, -0.49297318237793913, -0.6414566808573033, -0.5993480829133169, 0.5519239585972149, 0.12043699802529632, 0.0, 0.0, 0.0007012483601762931, 1.803133056928056, 0.6380971469137999, 0.0007012483601762931, 1.820620437909952, 0.6422900277340211, 0.3112447018619966, 0.38034746839466893, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [7.281554372874879e-05, -0.0015016446974561752, 0.0014326474059650962, -0.0026526812958948516, -0.00022821620740531628, 0.0026350112471423266, -0.0007574144329399804, -0.0019257941066365275, -0.00047250576465971507, -0.00018546024811624524, 0.0013574908072911875, 2.17099260955032e-05, -0.001984469607546901, 0.0002631487336597861, 0.0007145897423326197, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+
+# pozycja podniesiona przed postawieniem
+
+header: 
+  seq: 49843
+  stamp: 
+    secs: 563
+    nsecs: 390000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.8479370067212796, 0.48334617371245836, -1.4851888455833246, 2.5712990063348475, 0.6432216068598393, 0.020589908266191514, -1.6606441274634018, 1.1198170046419729, -0.5646354980238846, 1.9352836433081142, 0.0027299637329189167, -0.39254318640353, -0.758703154579339, 0.6135698140492477, -0.06616163140894009, 0.0, 0.0, 0.0014024967203525862, 1.8516988886725152, 0.6414657687239973, 0.0014024967203525862, 1.8590313168386086, 0.6387475547678636, 0.2984513020910303, 0.3277564710627977, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [-0.0001268204053275708, 0.0002306002101493778, -0.0002718396736198041, 0.0009079375493459994, 0.0026688539532521644, 0.0016491575933005476, 0.00823586609497804, 0.0015923689202002045, -0.0003723126741067667, -6.800385922224003e-05, 0.0022700296643761034, -1.784291339668333e-05, -0.0030174075481108793, 0.0002924577958111317, 0.000760501971999672, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+header: 
+  seq: 49844
+  stamp: 
+    secs: 563
+    nsecs: 400000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.8479351863326865, 0.48334950866649323, -1.4851896565318088, 2.5713037146297832, 0.6432425351513383, 0.020596618845771353, -1.6605905356407153, 1.119825388844805, -0.5646390089985114, 1.9352827370432455, 0.0027524663160363476, -0.3925433850803812, -0.7587339219963233, 0.6135734636043926, -0.0661544131377686, 0.0, 0.0, 0.0014024967203525862, 1.8516988886725152, 0.6414657687239973, 0.0014024967203525862, 1.8590313168386086, 0.6387475547678636, 0.2984513020910303, 0.3277564710627977, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [-0.00020024274525405917, 0.0003832400517437591, 3.056338297050844e-05, 0.00018558029765725938, 0.0017495740465105344, 0.00015802648876988602, 0.0036335837979156807, 0.0003185432124242077, -0.0003405352491990751, -0.00010249445412070767, 0.0022410849034744515, -1.9369058437052273e-05, -0.003114380149738912, 0.0004139766415225364, 0.0006969585774296112, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+
+# pozycja tuz przed odstawieniam
+
+header: 
+  seq: 61037
+  stamp: 
+    secs: 675
+    nsecs: 864000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [1.0233153675786633, 0.2431345866287985, -1.5587057734937435, 2.7013997674575005, 0.658877630907585, 0.009169826491319477, -1.7421822861349991, 1.0766135827339551, -0.6360003327512489, 2.009615327111456, 0.044136826580685594, -0.37258526798298525, -0.6027055542436277, 0.5829644696974398, -0.1821527377451339, 0.0, 0.0, 0.0009642164952424029, 1.8873486021829775, 0.6411916974898948, 0.0009642164952424029, 1.88409656291266, 0.639125936695542, 0.2504990626617252, 0.33882772173589754, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [-0.00013379856160157592, 0.0005976786276575774, 0.0006558096294445364, -0.00038859820153561413, -0.0017270777902044232, -0.001316313145610631, -0.008445908802749173, -0.0011460119367598526, 6.256421771282792e-05, -4.487640058005706e-05, -0.0002559685456589655, 2.679277692903536e-06, 0.00016800346990889902, 0.00014656863295705366, -0.00017499094368227022, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+header: 
+  seq: 61038
+  stamp: 
+    secs: 675
+    nsecs: 874000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [1.0233144573843667, 0.24313962557505195, -1.5587010130818963, 2.7013959462207624, 0.6588655272514187, 0.009170753773373038, -1.7422187058308352, 1.0766034807414537, -0.635999880926297, 2.0096149915543307, 0.04413441670068307, -0.3725852521020677, -0.6027037980257498, 0.5829658122481942, -0.18215441526854484, 0.0, 0.0, 0.0009642164952424029, 1.8873486021829775, 0.6411916974898948, 0.0009642164952424029, 1.88409656291266, 0.639125936695542, 0.2504990626617252, 0.33882772173589754, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [-0.00010012137262702959, 0.0004577050142086463, 0.000332909948167966, -0.00029268924981243165, -0.0007603021143702811, 0.0009299566913083092, 0.000360001108276076, -0.0008686540625457151, 3.5660136863757057e-05, -2.725879289099776e-05, -0.00023559195043356491, -2.3009071805875966e-07, 0.0001831118222763127, 0.0001233897814236348, -0.00015970222323299487, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+
+# pozycja po odstawieniu odsunieta
+
+header: 
+  seq: 64644
+  stamp: 
+    secs: 712
+    nsecs:  74000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.8835198391548271, 0.14680695040294273, -1.6231777877950013, 2.820061704034955, 0.7827351777338659, 0.16126986744042832, -1.7425074959320823, 1.4308674622506423, -0.580227867350989, 1.9510254907669353, 0.012274241243449582, -0.3864805275141278, -0.7280229078608853, 0.606798094527919, -0.09005960817645323, 0.0, 0.0, 0.0, 0.0002454369260617026, 4.90873852123405e-05, 0.0, 0.00021475731030398977, 1.4317154020265961e-05, 0.0, 1.6362461737446838e-05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [2.2754857415233996e-05, -1.3911314519795051e-05, 2.8510719182485954e-06, 6.8938187500121545e-06, -1.3669860567446738e-05, 1.3208032144315218e-05, -1.8206848805324416e-05, -7.454336600470207e-06, -0.0004891160265676509, 1.4370640920248527e-05, 0.0021008451499980357, -5.694874654166141e-06, -0.0027722826330149842, 0.0002867932784474487, 0.0006125319119984433, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
+header: 
+  seq: 64645
+  stamp: 
+    secs: 712
+    nsecs:  84000000
+  frame_id: ''
+name: [torso_0_joint, right_arm_0_joint, right_arm_1_joint, right_arm_2_joint, right_arm_3_joint,
+  right_arm_4_joint, right_arm_5_joint, right_arm_6_joint, left_arm_0_joint, left_arm_1_joint,
+  left_arm_2_joint, left_arm_3_joint, left_arm_4_joint, left_arm_5_joint, left_arm_6_joint,
+  head_pan_joint, head_tilt_joint, right_HandFingerOneKnuckleOneJoint, right_HandFingerOneKnuckleTwoJoint,
+  right_HandFingerOneKnuckleThreeJoint, right_HandFingerTwoKnuckleOneJoint, right_HandFingerTwoKnuckleTwoJoint,
+  right_HandFingerTwoKnuckleThreeJoint, right_HandFingerThreeKnuckleTwoJoint, right_HandFingerThreeKnuckleThreeJoint,
+  left_HandFingerOneKnuckleOneJoint, left_HandFingerOneKnuckleTwoJoint, left_HandFingerOneKnuckleThreeJoint,
+  left_HandFingerTwoKnuckleOneJoint, left_HandFingerTwoKnuckleTwoJoint, left_HandFingerTwoKnuckleThreeJoint,
+  left_HandFingerThreeKnuckleTwoJoint, left_HandFingerThreeKnuckleThreeJoint, leftFtSensorJoint,
+  rightFtSensorJoint]
+position: [0.8835198391548271, 0.14680679522852275, -1.6231777649727468, 2.8200617777329446, 0.7827350457897022, 0.1612699866664108, -1.7425077892823075, 1.4308673923388628, -0.5802327590494103, 1.951025636788215, 0.012295249571714247, -0.38648058306726535, -0.7280506221995076, 0.6068009557253651, -0.09005349029661941, 0.0, 0.0, 0.0, 0.0002454369260617026, 4.90873852123405e-05, 0.0, 0.00021475731030398977, 1.4317154020265961e-05, 0.0, 1.6362461737446838e-05, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+velocity: [2.427184790958293e-05, -1.6742441762823354e-05, 1.7575778383954223e-06, 7.957454537866254e-06, -1.2361762093932461e-05, 1.1186712294334027e-05, -2.8557232450099335e-05, -6.954977336599659e-06, -0.0004892562443120846, 1.477025590885137e-05, 0.0021009682843018103, -5.584138781790848e-06, -0.0027704487966854355, 0.00028577391059318204, 0.0006111630199206334, -0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+effort: [1.63e-322, 2.471830099943691e-80, 4.6881443307369e-310, 2.2e-322, 2.2e-322, 3.1625112025583407e+180, 4.6881443306942e-310, 5.4e-323, 3.443045277013919e-85, 9.162232140747785e-72, 4.6881442239768e-310, 4.6881442239784e-310, 4.6881442239784e-310, 3.3828065948825904e-67, 6.92123398191537e-310, 4.68814433069657e-310, 0.0, 3.088684015075565e+262, 0.0, 0.0, 5.668997005159327e-08, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 8.237564576e-315, 2.646866639982388e+180, 3.6759107990198124e+228, 0.0, 0.0, 2.1177611172851644e+161, 0.0, 0.0]
+---
