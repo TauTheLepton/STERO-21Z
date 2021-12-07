@@ -6,5 +6,6 @@ rosrun velma_common reset_shm_comm.py
 # mapa zajętości przestrzeni
 włączanielaunch w instrukcji 
 by topic free cels
-merged_cells_*_array ??
+merged_cells_*_array ?? interesuje nas merged cells
 optomapa może być zapisana do pliku, żeby było szybciej - jest w instrukcji
+roslaunch velma_common octomap_offline_server.launch octomap_file:=/home/student/mobile_ws/src/zubik-palczuk/manipulation/data/new_octmap.bt
