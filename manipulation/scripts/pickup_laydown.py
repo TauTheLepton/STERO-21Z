@@ -175,12 +175,12 @@ if __name__ == "__main__":
     rospy.sleep(5)
 
     print "MOVING JAR TO FINAL POSITION!!!"
-    pre_pickup_constraint_3 = qMapToConstraints(q_before_laydown, 0.01, group=velma.getJointGroup("impedance_joints"))
+    post_pickup_constraint_1 = qMapToConstraints(q_before_laydown, 0.01, group=velma.getJointGroup("impedance_joints"))
     for i in range(15):
         rospy.sleep(0.5)
         js = velma.getLastJointState()
         print "Planning (try", i, ")..."
-        traj = p.plan(js[1], [pre_pickup_constraint_3], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
+        traj = p.plan(js[1], [post_pickup_constraint_1], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
         if traj == None:
             continue
         print "Executing trajectory..."
@@ -203,12 +203,12 @@ if __name__ == "__main__":
     rospy.sleep(5)
 
     print "MOVING TO START POSITION!!!"
-    pre_pickup_constraint_4 = qMapToConstraints(q_start, 0.01, group=velma.getJointGroup("impedance_joints"))
+    post_pickup_constraint_2 = qMapToConstraints(q_start, 0.01, group=velma.getJointGroup("impedance_joints"))
     for i in range(15):
         rospy.sleep(0.5)
         js = velma.getLastJointState()
         print "Planning (try", i, ")..."
-        traj = p.plan(js[1], [pre_pickup_constraint_4], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
+        traj = p.plan(js[1], [post_pickup_constraint_2], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
         if traj == None:
             continue
         print "Executing trajectory..."
