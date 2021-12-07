@@ -45,9 +45,8 @@ if __name__ == "__main__":
     rospy.init_node('pickup_laydown')
     rospy.sleep(0.5)
 
-    print "This test/tutorial executes complex motions"\
-        " in Joint Impedance mode. Planning is used"\
-        " in this example.\n"
+    print "This test/tutorial executes pickup and laydown task"\
+        " In this example planning is used"\
  
     print "Running python interface for Velma..."
     velma = VelmaInterface()
@@ -66,10 +65,30 @@ if __name__ == "__main__":
         exitError(2, msg="Could not initialize Planner")
     print "Planner initialization ok!"
 
-    # velma = VelmaInterface()
-    # velma.waitForInit()
-    # p = Planner(velma.maxJointTrajLen())
-    # p.waitForInit(): done 
+    #Define a function for frequently used routine in this test
+    def planAndExecute(q_dest):
+        print "Planning motion to the goal position using set of all joints..."
+        print "Moving to valid position, using planned trajectory."
+        goal_constraint = qMapToConstraints(q_dest, 0.01, group=velma.getJointGroup("impedance_joints"))
+        for i in range(5):
+            rospy.sleep(0.5)
+            js = velma.getLastJointState()
+            print "Planning (try", i, ")..."
+            traj = p.plan(js[1], [goal_constraint], "impedance_joints", max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
+            if traj == None:
+                continue
+            print "Executing trajectory..."
+            if not velma.moveJointTraj(traj, start_time=0.5):
+                exitError(5)
+            if velma.waitForJoint() == 0:
+                break
+            else:
+                print "The trajectory could not be completed, retrying..."
+                continue
+        rospy.sleep(0.5)
+        js = velma.getLastJointState()
+        if not isConfigurationClose(q_dest, js[1]):
+            exitError(6)
 
     #Loading octomap
     oml = OctomapListener("/octomap_binary")
@@ -88,6 +107,14 @@ if __name__ == "__main__":
         print "The action should have ended without error, but the error code is", error
         exitError(4)
 
+
+    #Get objects position form Gazebo
+    T_B_Table_a = velma.getTf("B", "table_a")
+    T_B_Table_b = velma.getTf("B", "table_b")
+    T_B_Jar = velma.getTf("B", "jar_hollow")
+    T_B_Bowl = velma.getTf("B", "bowl_high")
+    # print T_B_Bowl.M, T_B_Bowl.p
+
     print "Checking if the starting configuration is as expected..."
     rospy.sleep(0.5)
     js = velma.getLastJointState()
@@ -100,130 +127,63 @@ if __name__ == "__main__":
 
     # js = velma.getLastJointState()
     # if not isConfigurationClose(q_start, js[1]):
+
+    
     print "MOVING TO START POSITION!!!"
-    pre_pickup_constraint_1 = qMapToConstraints(q_start, 0.01, group=velma.getJointGroup("impedance_joints"))
-    for i in range(15):
-        rospy.sleep(0.5)
-        js = velma.getLastJointState()
-        print "Planning (try", i, ")..."
-        traj = p.plan(js[1], [pre_pickup_constraint_1], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
-        if traj == None:
-            continue
-        print "Executing trajectory..."
-        if not velma.moveJointTraj(traj, start_time=0.5, position_tol=10.0/180.0 * math.pi, velocity_tol=10.0/180.0*math.pi):
-            exitError(5)
-        if velma.waitForJoint() == 0:
-            break
-        else:
-            print "The trajectory could not be completed, retrying..."
-            continue
+    planAndExecute(q_start)
 
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    if not isConfigurationClose(q_start, js[1]):
-        exitError(6)
+    # print "MOVING TO INTERMEDIATE POSITION!!!"
+    # planAndExecute(q_pre_pickup)
 
-    # print "Moving to valid position, using planned trajectory."
-    # pre_pickup_constraint_1 = qMapToConstraints(q_pre_pickup, 0.01, group=velma.getJointGroup("impedance_joints"))
-    # for i in range(15):
-    #     rospy.sleep(0.5)
-    #     js = velma.getLastJointState()
-    #     print "Planning (try", i, ")..."
-    #     traj = p.plan(js[1], [pre_pickup_constraint_1], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
-    #     if traj == None:
-    #         continue
-    #     print "Executing trajectory..."
-    #     if not velma.moveJointTraj(traj, start_time=0.5, position_tol=10.0/180.0 * math.pi, velocity_tol=10.0/180.0*math.pi):
-    #         exitError(5)
-    #     if velma.waitForJoint() == 0:
-    #         break
-    #     else:
-    #         print "The trajectory could not be completed, retrying..."
-    #         continue
-
+    # print "Switch to cart_imp mode (no trajectory)..."
+    # if not velma.moveCartImpRightCurrentPos(start_time=0.2):
+    #     exitError(10)
+    # if velma.waitForEffectorRight() != 0:
+    #     exitError(11)
+ 
     # rospy.sleep(0.5)
-    # js = velma.getLastJointState()
-    # if not isConfigurationClose(q_pre_pickup, js[1]):
-    #     exitError(6)
+ 
+    # diag = velma.getCoreCsDiag()
+    # if not diag.inStateCartImp():
+    #     print "The core_cs should be in cart_imp state, but it is not"
+    #     exitError(12)
+
+    # print "Moving right wrist to pose defined in world frame..."
+    # if not velma.moveCartImpRight([T_B_Bowl], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
+    #     exitError(13)
+    # if velma.waitForEffectorRight() != 0:
+    #     exitError(14)
+    # rospy.sleep(0.5)
+    # print "Calculating difference between desiread and reached pose..."
+    # T_B_T_diff = PyKDL.diff(T_B_Bowl, velma.getTf("B", "bowl_high"), 1.0)
+    # print T_B_T_diff
+    # if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
+    #     exitError(15)
+
 
     print "MOVING TO THE JAR!!!"
-    pre_pickup_constraint_2 = qMapToConstraints(q_next_to_jar, 0.01, group=velma.getJointGroup("impedance_joints"))
-    for i in range(15):
-        rospy.sleep(0.5)
-        js = velma.getLastJointState()
-        print "Planning (try", i, ")..."
-        traj = p.plan(js[1], [pre_pickup_constraint_2], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
-        if traj == None:
-            continue
-        print "Executing trajectory..."
-        if not velma.moveJointTraj(traj, start_time=0.5, position_tol=10.0/180.0 * math.pi, velocity_tol=10.0/180.0*math.pi):
-            exitError(5)
-        if velma.waitForJoint() == 0:
-            break
-        else:
-            print "The trajectory could not be completed, retrying..."
-            continue
+    planAndExecute(q_next_to_jar)
 
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    if not isConfigurationClose(q_next_to_jar, js[1]):
-        exitError(6)
 
     # HERE SHOULD CLOSE GRIP
     print("CLOSING GRIP!!!")
     velma.moveHandRight([1.5, 1.5, 1.5, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
     rospy.sleep(5)
 
+    
     print "MOVING JAR TO FINAL POSITION!!!"
-    post_pickup_constraint_1 = qMapToConstraints(q_before_laydown, 0.01, group=velma.getJointGroup("impedance_joints"))
-    for i in range(15):
-        rospy.sleep(0.5)
-        js = velma.getLastJointState()
-        print "Planning (try", i, ")..."
-        traj = p.plan(js[1], [post_pickup_constraint_1], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
-        if traj == None:
-            continue
-        print "Executing trajectory..."
-        if not velma.moveJointTraj(traj, start_time=0.5, position_tol=10.0/180.0 * math.pi, velocity_tol=10.0/180.0*math.pi):
-            exitError(5)
-        if velma.waitForJoint() == 0:
-            break
-        else:
-            print "The trajectory could not be completed, retrying..."
-            continue
+    planAndExecute(q_before_laydown)
 
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    if not isConfigurationClose(q_before_laydown, js[1]):
-        exitError(6)
 
     rospy.sleep(1)
     print "OPENING GRIP!!!"
     velma.moveHandRight([0, 0, 0, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
     rospy.sleep(5)
 
+    
     print "MOVING TO START POSITION!!!"
-    post_pickup_constraint_2 = qMapToConstraints(q_start, 0.01, group=velma.getJointGroup("impedance_joints"))
-    for i in range(15):
-        rospy.sleep(0.5)
-        js = velma.getLastJointState()
-        print "Planning (try", i, ")..."
-        traj = p.plan(js[1], [post_pickup_constraint_2], "impedance_joints", num_planning_attempts=10, max_velocity_scaling_factor=0.15, planner_id="RRTConnect")
-        if traj == None:
-            continue
-        print "Executing trajectory..."
-        if not velma.moveJointTraj(traj, start_time=0.5, position_tol=10.0/180.0 * math.pi, velocity_tol=10.0/180.0*math.pi):
-            exitError(5)
-        if velma.waitForJoint() == 0:
-            break
-        else:
-            print "The trajectory could not be completed, retrying..."
-            continue
+    planAndExecute(q_start)
 
-    rospy.sleep(0.5)
-    js = velma.getLastJointState()
-    if not isConfigurationClose(q_start, js[1]):
-        exitError(6)
 
     print "ENDING OPERATION!!!"
 
