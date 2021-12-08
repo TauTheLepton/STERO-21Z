@@ -1,0 +1,53 @@
+#Reset buffers
+
+rosrun velma_common reset_shm_comm.py
+
+#Home motors
+
+rosrun velma_task_cs_ros_interface initialize_robot.py
+
+#Manipulation velma_system.launch
+
+roslaunch  manipulation velma_system.launch
+
+#Planner launch
+
+roslaunch velma_ros_plugin velma_planner.launch
+
+#RViz
+
+rosrun rcprg_ros_utils run_rviz.sh
+
+#Gazebo
+
+roslaunch rcprg_gazebo_utils gazebo_client.launch
+
+#Octomap offline
+
+roslaunch velma_common octomap_offline_server.launch  octomap_file:=/home/student/mobile_ws/src/zubik-palczuk/manipulation/data/new_octmap.bt
+
+#Table_a gazebo position
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=table_a::link frame_id:=table_a
+
+#Table_b gazebo position
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=table_b::link frame_id:=table_b
+
+#Jar hollow gazebo position
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=jar_hollow::link frame_id:=jar
+
+#Bowl high gazebo position
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=bowl_high::link frame_id:=bowl
+
+
+#Pickup laydown script
+
+/.../manipulation/scripts python pickup_laydown.py
+
+
+
+
+
