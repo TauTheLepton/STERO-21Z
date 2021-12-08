@@ -14,9 +14,6 @@ from rcprg_ros_utils import exitError
 if __name__ == "__main__":
     #Define some configurations
 
-    #Starting position
-    q_map_starting = {'torso_0_joint':0}
-
     q_start = {'torso_0_joint':6.067961977395732e-07, 'right_arm_0_joint':-0.2892, 'right_arm_1_joint':-1.8185, 'right_arm_2_joint':1.2490,
          'right_arm_3_joint':0.8595, 'right_arm_4_joint':0.0126, 'right_arm_5_joint':-0.5617, 'right_arm_6_joint':0.0088,
          'left_arm_0_joint':0.4069, 'left_arm_1_joint':1.7526, 'left_arm_2_joint':-1.1731,
@@ -27,6 +24,7 @@ if __name__ == "__main__":
          'right_arm_6_joint':0.8851, 'left_arm_0_joint':0.4069, 'left_arm_1_joint':1.7526, 'left_arm_2_joint':-1.1731,
          'left_arm_3_joint':-0.8924, 'left_arm_4_joint':-0.4004, 'left_arm_5_joint':0.6363, 'left_arm_6_joint':0.1905 }
     
+    #not needed anymore ?
     q_next_to_jar = {'torso_0_joint':0.4963280397467873,
         'right_arm_0_joint':0.06471796460146129, 'right_arm_1_joint':-1.6963078134386786, 'right_arm_2_joint':2.7565891151139,
         'right_arm_3_joint':0.922547506515648, 'right_arm_4_joint':0.06210539575890758, 'right_arm_5_joint':-1.724952784130839,
@@ -90,6 +88,32 @@ if __name__ == "__main__":
         if not isConfigurationClose(q_dest, js[1]):
             exitError(6)
 
+    def makeCimpMove(Tf_frame, announcement):
+        print "Switch to cart_imp mode (no trajectory)..."
+        if not velma.moveCartImpRightCurrentPos(start_time=0.2):
+            exitError(10)
+        if velma.waitForEffectorRight() != 0:
+            exitError(11)
+    
+        rospy.sleep(0.5)
+    
+        diag = velma.getCoreCsDiag()
+        if not diag.inStateCartImp():
+            exitError(12, msg="The core_cs should be in cart_imp state, but it is not")
+
+        print announcement
+        if not velma.moveCartImpRight([T_B_Jar], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
+            exitError(13)
+        if velma.waitForEffectorRight() != 0:
+            exitError(14)
+        rospy.sleep(0.5)
+        print "Calculating difference between desiread and reached pose..."
+        T_B_T_diff = PyKDL.diff(Tf_frame, Tf_frame, 1.0)
+        print T_B_T_diff
+        if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
+            exitError(15)
+
+
     #Loading octomap
     oml = OctomapListener("/octomap_binary")
     rospy.sleep(1.0)
@@ -112,31 +136,83 @@ if __name__ == "__main__":
     T_B_Table_a = velma.getTf("B", "table_a")
     T_B_Table_b = velma.getTf("B", "table_b")
     T_B_Jar = velma.getTf("B", "jar")
-    T_B_Bowl = velma.getTf("Wo", "bowl")
-    print T_B_Table_a.M, T_B_Table_a.p
-    print T_B_Table_b.M, T_B_Table_b.p
-    print T_B_Jar.M, T_B_Jar.p
-    print T_B_Bowl.M, T_B_Bowl.p
+    T_B_Bowl = velma.getTf("B", "bowl")
+    #Lookup where objects are located
+    # print T_B_Table_a.M, T_B_Table_a.p
+    # print T_B_Table_b.M, T_B_Table_b.p
+    # print T_B_Jar.M, T_B_Jar.p
+    # print T_B_Bowl.M, T_B_Bowl.p
 
     print "Checking if the starting configuration is as expected..."
     rospy.sleep(0.5)
     js = velma.getLastJointState()
-    # if not isConfigurationClose(q_map_starting, js[1], tolerance=0.2):
-    #     print "This test requires starting pose:"
-    #     print q_map_starting
-    #     exitError(10)
-
-    print "Planning motion to the pre_pickup position using set of all joints..."
-
-    # js = velma.getLastJointState()
-    # if not isConfigurationClose(q_start, js[1]):
-
     
     print "MOVING TO START POSITION!!!"
     planAndExecute(q_start)
 
     print "MOVING TO INTERMEDIATE POSITION!!!"
     planAndExecute(q_pre_pickup)
+
+
+    T_B_Jar = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
+    makeCimpMove(T_B_Jar, "MOVING TOWARDS THE JAR!!!")
+    # print "Switch to cart_imp mode (no trajectory)..."
+    # if not velma.moveCartImpRightCurrentPos(start_time=0.2):
+    #     exitError(10)
+    # if velma.waitForEffectorRight() != 0:
+    #     exitError(11)
+ 
+    # rospy.sleep(0.5)
+ 
+    # diag = velma.getCoreCsDiag()
+    # if not diag.inStateCartImp():
+    #     exitError(12, msg="The core_cs should be in cart_imp state, but it is not")
+
+    # print "MOVING TOWARDS THE JAR!!!"
+    # #Grip offset
+    # T_B_Jar = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
+    # if not velma.moveCartImpRight([T_B_Jar], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
+    #     exitError(13)
+    # if velma.waitForEffectorRight() != 0:
+    #     exitError(14)
+    # rospy.sleep(0.5)
+    # print "Calculating difference between desiread and reached pose..."
+    # T_B_T_diff = PyKDL.diff(T_B_Jar, T_B_Jar, 1.0)
+    # print T_B_T_diff
+    # if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
+    #     exitError(15)
+
+    # HERE SHOULD CLOSE GRIP
+    print("CLOSING GRIP!!!")
+    velma.moveHandRight([1.5, 1.5, 1.5, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
+    rospy.sleep(5)
+
+    T_B_Jar_up = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0], T_B_Jar.p[1], T_B_Jar.p[2] + 0.3))
+    makeCimpMove(T_B_Jar_up, "MOVING WITH AN OBJECT UPWARDS")
+    # print "MOVING WITH AN OBJECT UPWARDS"
+    # #Grip offset
+    # T_B_Jar_up = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0], T_B_Jar.p[1], T_B_Jar.p[2] + 0.3))
+    # if not velma.moveCartImpRight([T_B_Jar_up], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
+    #     exitError(13)
+    # if velma.waitForEffectorRight() != 0:
+    #     exitError(14)
+    # rospy.sleep(0.5)
+    # print "Calculating difference between desiread and reached pose..."
+    # T_B_T_diff = PyKDL.diff(T_B_Jar_up, T_B_Jar_up, 1.0)
+    # print T_B_T_diff
+    # if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
+    #     exitError(15)
+
+
+    print "Switch to jnt_imp mode (no trajectory)..."
+    velma.moveJointImpToCurrentPos(start_time=0.5)
+    error = velma.waitForJoint()
+    if error != 0:
+        print "The action should have ended without error, but the error code is", error
+        exitError(4)
+    
+    print "MOVING JAR TO FINAL POSITION!!!"
+    planAndExecute(q_before_laydown)
 
     print "Switch to cart_imp mode (no trajectory)..."
     if not velma.moveCartImpRightCurrentPos(start_time=0.2):
@@ -150,39 +226,32 @@ if __name__ == "__main__":
     if not diag.inStateCartImp():
         exitError(12, msg="The core_cs should be in cart_imp state, but it is not")
 
-    print "Moving right wrist towards the jar"
-    # T_B_Jar = PyKDL.Frame(PyKDL.Rotation.Quaternion( 0.0 , 0.0 , 0.0 , 1.0 ), PyKDL.Vector( 0.7 , -0.3 , 1.3 ))
-    if not velma.moveCartImpRight([T_B_Jar], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
+    rospy.sleep(1)
+    print "OPENING GRIP!!!"
+    velma.moveHandRight([0, 0, 0, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
+    rospy.sleep(5)
+
+    print "DISTANCING FROM THE JAR"
+    #Grip offset
+    T_B_Wr_down = velma.getTf("B", "Wr")
+    T_B_Wr_down = PyKDL.Frame(T_B_Wr_down.M, PyKDL.Vector( T_B_Wr_down.p[0], T_B_Wr_down.p[1], T_B_Wr_down.p[2] + 0.3))
+    if not velma.moveCartImpRight([T_B_Wr_down], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
         exitError(13)
     if velma.waitForEffectorRight() != 0:
         exitError(14)
     rospy.sleep(0.5)
     print "Calculating difference between desiread and reached pose..."
-    T_B_T_diff = PyKDL.diff(T_B_Jar, velma.getTf("B", "jar"), 1.0)
+    T_B_T_diff = PyKDL.diff(T_B_Wr_down, T_B_Wr_down, 1.0)
     print T_B_T_diff
     if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
         exitError(15)
 
-
-    # print "MOVING TO THE JAR!!!"
-    # planAndExecute(q_next_to_jar)
-
-
-    # # HERE SHOULD CLOSE GRIP
-    # print("CLOSING GRIP!!!")
-    # velma.moveHandRight([1.5, 1.5, 1.5, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
-    # rospy.sleep(5)
-
-    
-    # print "MOVING JAR TO FINAL POSITION!!!"
-    # planAndExecute(q_before_laydown)
-
-
-    # rospy.sleep(1)
-    # print "OPENING GRIP!!!"
-    # velma.moveHandRight([0, 0, 0, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
-    # rospy.sleep(5)
-
+    print "Switch to jnt_imp mode (no trajectory)..."
+    velma.moveJointImpToCurrentPos(start_time=0.5)
+    error = velma.waitForJoint()
+    if error != 0:
+        print "The action should have ended without error, but the error code is", error
+        exitError(4)
     
     print "MOVING TO START POSITION!!!"
     planAndExecute(q_start)
