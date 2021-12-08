@@ -146,62 +146,30 @@ if __name__ == "__main__":
     print "Checking if the starting configuration is as expected..."
     rospy.sleep(0.5)
     js = velma.getLastJointState()
+
     
     print "MOVING TO START POSITION!!!"
     planAndExecute(q_start)
+
 
     print "MOVING TO INTERMEDIATE POSITION!!!"
     planAndExecute(q_pre_pickup)
 
 
+    #Grip offset
     T_B_Jar = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
     makeCimpMove(T_B_Jar, "MOVING TOWARDS THE JAR!!!")
-    # print "Switch to cart_imp mode (no trajectory)..."
-    # if not velma.moveCartImpRightCurrentPos(start_time=0.2):
-    #     exitError(10)
-    # if velma.waitForEffectorRight() != 0:
-    #     exitError(11)
- 
-    # rospy.sleep(0.5)
- 
-    # diag = velma.getCoreCsDiag()
-    # if not diag.inStateCartImp():
-    #     exitError(12, msg="The core_cs should be in cart_imp state, but it is not")
 
-    # print "MOVING TOWARDS THE JAR!!!"
-    # #Grip offset
-    # T_B_Jar = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
-    # if not velma.moveCartImpRight([T_B_Jar], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
-    #     exitError(13)
-    # if velma.waitForEffectorRight() != 0:
-    #     exitError(14)
-    # rospy.sleep(0.5)
-    # print "Calculating difference between desiread and reached pose..."
-    # T_B_T_diff = PyKDL.diff(T_B_Jar, T_B_Jar, 1.0)
-    # print T_B_T_diff
-    # if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
-    #     exitError(15)
 
     # HERE SHOULD CLOSE GRIP
     print("CLOSING GRIP!!!")
     velma.moveHandRight([1.5, 1.5, 1.5, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
     rospy.sleep(5)
 
+
+    #Grip offset
     T_B_Jar_up = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0], T_B_Jar.p[1], T_B_Jar.p[2] + 0.3))
     makeCimpMove(T_B_Jar_up, "MOVING WITH AN OBJECT UPWARDS")
-    # print "MOVING WITH AN OBJECT UPWARDS"
-    # #Grip offset
-    # T_B_Jar_up = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0], T_B_Jar.p[1], T_B_Jar.p[2] + 0.3))
-    # if not velma.moveCartImpRight([T_B_Jar_up], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
-    #     exitError(13)
-    # if velma.waitForEffectorRight() != 0:
-    #     exitError(14)
-    # rospy.sleep(0.5)
-    # print "Calculating difference between desiread and reached pose..."
-    # T_B_T_diff = PyKDL.diff(T_B_Jar_up, T_B_Jar_up, 1.0)
-    # print T_B_T_diff
-    # if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
-    #     exitError(15)
 
 
     print "Switch to jnt_imp mode (no trajectory)..."
@@ -211,8 +179,10 @@ if __name__ == "__main__":
         print "The action should have ended without error, but the error code is", error
         exitError(4)
     
+    
     print "MOVING JAR TO FINAL POSITION!!!"
     planAndExecute(q_before_laydown)
+
 
     print "Switch to cart_imp mode (no trajectory)..."
     if not velma.moveCartImpRightCurrentPos(start_time=0.2):
@@ -226,25 +196,19 @@ if __name__ == "__main__":
     if not diag.inStateCartImp():
         exitError(12, msg="The core_cs should be in cart_imp state, but it is not")
 
+
     rospy.sleep(1)
     print "OPENING GRIP!!!"
     velma.moveHandRight([0, 0, 0, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
     rospy.sleep(5)
 
+
     print "DISTANCING FROM THE JAR"
-    #Grip offset
     T_B_Wr_down = velma.getTf("B", "Wr")
+    #Grip offset
     T_B_Wr_down = PyKDL.Frame(T_B_Wr_down.M, PyKDL.Vector( T_B_Wr_down.p[0], T_B_Wr_down.p[1], T_B_Wr_down.p[2] + 0.3))
-    if not velma.moveCartImpRight([T_B_Wr_down], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
-        exitError(13)
-    if velma.waitForEffectorRight() != 0:
-        exitError(14)
-    rospy.sleep(0.5)
-    print "Calculating difference between desiread and reached pose..."
-    T_B_T_diff = PyKDL.diff(T_B_Wr_down, T_B_Wr_down, 1.0)
-    print T_B_T_diff
-    if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
-        exitError(15)
+    makeCimpMove(T_B_Wr_down, "DISTANCING FROM THE JAR")
+
 
     print "Switch to jnt_imp mode (no trajectory)..."
     velma.moveJointImpToCurrentPos(start_time=0.5)
