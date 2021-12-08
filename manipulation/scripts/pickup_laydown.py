@@ -102,7 +102,7 @@ if __name__ == "__main__":
             exitError(12, msg="The core_cs should be in cart_imp state, but it is not")
 
         print announcement
-        if not velma.moveCartImpRight([T_B_Jar], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
+        if not velma.moveCartImpRight([Tf_frame], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
             exitError(13)
         if velma.waitForEffectorRight() != 0:
             exitError(14)
