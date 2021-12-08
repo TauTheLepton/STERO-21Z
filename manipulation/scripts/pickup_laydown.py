@@ -111,9 +111,12 @@ if __name__ == "__main__":
     #Get objects position form Gazebo
     T_B_Table_a = velma.getTf("B", "table_a")
     T_B_Table_b = velma.getTf("B", "table_b")
-    T_B_Jar = velma.getTf("B", "jar_hollow")
-    T_B_Bowl = velma.getTf("B", "bowl_high")
-    # print T_B_Bowl.M, T_B_Bowl.p
+    T_B_Jar = velma.getTf("B", "jar")
+    T_B_Bowl = velma.getTf("Wo", "bowl")
+    print T_B_Table_a.M, T_B_Table_a.p
+    print T_B_Table_b.M, T_B_Table_b.p
+    print T_B_Jar.M, T_B_Jar.p
+    print T_B_Bowl.M, T_B_Bowl.p
 
     print "Checking if the starting configuration is as expected..."
     rospy.sleep(0.5)
@@ -132,53 +135,53 @@ if __name__ == "__main__":
     print "MOVING TO START POSITION!!!"
     planAndExecute(q_start)
 
-    # print "MOVING TO INTERMEDIATE POSITION!!!"
-    # planAndExecute(q_pre_pickup)
+    print "MOVING TO INTERMEDIATE POSITION!!!"
+    planAndExecute(q_pre_pickup)
 
-    # print "Switch to cart_imp mode (no trajectory)..."
-    # if not velma.moveCartImpRightCurrentPos(start_time=0.2):
-    #     exitError(10)
-    # if velma.waitForEffectorRight() != 0:
-    #     exitError(11)
+    print "Switch to cart_imp mode (no trajectory)..."
+    if not velma.moveCartImpRightCurrentPos(start_time=0.2):
+        exitError(10)
+    if velma.waitForEffectorRight() != 0:
+        exitError(11)
  
-    # rospy.sleep(0.5)
+    rospy.sleep(0.5)
  
-    # diag = velma.getCoreCsDiag()
-    # if not diag.inStateCartImp():
-    #     print "The core_cs should be in cart_imp state, but it is not"
-    #     exitError(12)
+    diag = velma.getCoreCsDiag()
+    if not diag.inStateCartImp():
+        exitError(12, msg="The core_cs should be in cart_imp state, but it is not")
 
-    # print "Moving right wrist to pose defined in world frame..."
-    # if not velma.moveCartImpRight([T_B_Bowl], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
-    #     exitError(13)
-    # if velma.waitForEffectorRight() != 0:
-    #     exitError(14)
-    # rospy.sleep(0.5)
-    # print "Calculating difference between desiread and reached pose..."
-    # T_B_T_diff = PyKDL.diff(T_B_Bowl, velma.getTf("B", "bowl_high"), 1.0)
-    # print T_B_T_diff
-    # if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
-    #     exitError(15)
-
-
-    print "MOVING TO THE JAR!!!"
-    planAndExecute(q_next_to_jar)
+    print "Moving right wrist towards the jar"
+    # T_B_Jar = PyKDL.Frame(PyKDL.Rotation.Quaternion( 0.0 , 0.0 , 0.0 , 1.0 ), PyKDL.Vector( 0.7 , -0.3 , 1.3 ))
+    if not velma.moveCartImpRight([T_B_Jar], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
+        exitError(13)
+    if velma.waitForEffectorRight() != 0:
+        exitError(14)
+    rospy.sleep(0.5)
+    print "Calculating difference between desiread and reached pose..."
+    T_B_T_diff = PyKDL.diff(T_B_Jar, velma.getTf("B", "jar"), 1.0)
+    print T_B_T_diff
+    if T_B_T_diff.vel.Norm() > 0.05 or T_B_T_diff.rot.Norm() > 0.05:
+        exitError(15)
 
 
-    # HERE SHOULD CLOSE GRIP
-    print("CLOSING GRIP!!!")
-    velma.moveHandRight([1.5, 1.5, 1.5, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
-    rospy.sleep(5)
+    # print "MOVING TO THE JAR!!!"
+    # planAndExecute(q_next_to_jar)
+
+
+    # # HERE SHOULD CLOSE GRIP
+    # print("CLOSING GRIP!!!")
+    # velma.moveHandRight([1.5, 1.5, 1.5, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
+    # rospy.sleep(5)
 
     
-    print "MOVING JAR TO FINAL POSITION!!!"
-    planAndExecute(q_before_laydown)
+    # print "MOVING JAR TO FINAL POSITION!!!"
+    # planAndExecute(q_before_laydown)
 
 
-    rospy.sleep(1)
-    print "OPENING GRIP!!!"
-    velma.moveHandRight([0, 0, 0, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
-    rospy.sleep(5)
+    # rospy.sleep(1)
+    # print "OPENING GRIP!!!"
+    # velma.moveHandRight([0, 0, 0, 0], [1, 1, 1, 1], [4000,4000,4000,4000], 1000, hold=True)
+    # rospy.sleep(5)
 
     
     print "MOVING TO START POSITION!!!"
