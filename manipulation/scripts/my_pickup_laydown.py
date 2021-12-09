@@ -98,7 +98,7 @@ def getIk(arm_name, T_A0_A7d, ampl):
     base_link_name = 'calib_{}_arm_base_link'.format(arm_name)
     phase = 0.0
     # while not rospy.is_shutdown():
-    for index in range(10000):
+    for index in range(100000):
         # print js_msg
         tx = ampl * math.sin(phase)
         ty = ampl * math.sin(phase*1.1)
@@ -148,6 +148,19 @@ def maximumSum(state_list):
 def goalPoint(table):
     goal_pos = [table.p[0], table.p[1], 1]
     return goal_pos
+
+def getManipOrient(robot, goal):
+    # if goal_pos[0] > robot_pos[0]:
+    #     temp = goal_pos[0] > robot_pos[0]
+    # else:
+    #     temp = goal_pos[0] > robot_pos[0]
+    my_z_rotation = math.atan2(goal.p[0] - robot.p[0], goal.p[1] - robot.p[1])
+    print "my z rotation"
+    print my_z_rotation
+    # my_z_rotation = math.atan2(goal_pos[0], goal_pos[1])
+    orig_base_rpy = robot.M.GetRPY()
+    goal_orient_pickup = PyKDL.Rotation.RPY(orig_base_rpy[0], orig_base_rpy[1], my_z_rotation)
+    return goal_orient_pickup
 
 def create_state(position):
     print len(position), position
@@ -242,6 +255,25 @@ def main():
     T_B_arm1 = velma.getTf("B", "right_arm_1_link")
     T_B_base = velma.getTf("B", "torso_base")
 
+    # # test manip ortient
+    # orient = getManipOrient(T_B_base, T_B_Jar)
+    # print "orient"
+    # print orient
+    # T_B_Jar1 = T_B_Jar
+    # T_B_Jar1.p[0] = 1
+    # T_B_Jar1.p[1] = 1
+    # print getManipOrient(T_B_base, T_B_Jar1)
+    # T_B_Jar1.p[0] = -1
+    # T_B_Jar1.p[1] = 1
+    # print getManipOrient(T_B_base, T_B_Jar1)
+    # T_B_Jar1.p[0] = 1
+    # T_B_Jar1.p[1] = -1
+    # print getManipOrient(T_B_base, T_B_Jar1)
+    # T_B_Jar1.p[0] = -1
+    # T_B_Jar1.p[1] = -1
+    # print getManipOrient(T_B_base, T_B_Jar1)
+    # return 0
+
     #Lookup where objects are located
     # print T_B_Table_a.M, T_B_Table_a.p
     # print T_B_Table_b.M, T_B_Table_b.p
@@ -262,13 +294,10 @@ def main():
         print "EXITING..."
         return 0
 
-    # if T_B_Jar.p[0] > T_B_base.p[0]:
-    #     temp = T_B_Jar.p[0] > T_B_base.p[0]
-    # else:
-    #     temp = T_B_Jar.p[0] > T_B_base.p[0]
-    my_z_rotation = math.atan2(T_B_base.p[0] - T_B_Jar.p[0], T_B_base.p[1] - T_B_Jar.p[1])
-    # my_z_rotation = math.atan2(T_B_Jar.p[0], T_B_Jar.p[1])
-    goal_orient_pickup = PyKDL.Rotation.RPY(orig_base_rpy[0], orig_base_rpy[1], my_z_rotation)
+    # # manip orientation
+    # manip_orient = getManipOrient(T_B_base, T_B_Jar)
+    # tmp = PyKDL.Frame(manip_orient, T_B_Jar.p)
+    # makeCimpMove(velma, tmp, "TEST MOOVE MANIP WITH ORIENT!!!")
 
     print "Checking if the starting configuration is as expected..."
     rospy.sleep(0.5)
