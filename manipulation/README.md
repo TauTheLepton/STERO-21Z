@@ -19,7 +19,8 @@ To działanie pozwoliło nam z wielu pozycji pośrednich zapisanych w kodie zred
 Kolejnym krokiem było dodanie sterowania w trybie zadawania pozycji końcówki manipulatora jednej ręki w przestrzeni kartezjańskiej związanej z bazowym układem współrzędnych.
 Do tego potrzeba było odczytać pozycję szklanki ze świata rzeczywistego, co zrobiliśmy wczytując pozycję szklanki prosto z programu gazebo symulującgo naszą rzeczywistość.
 Do pozycji szklanki dodaliśmy stały offset tak, żeby manipulator zatrzymał się kawałem przed słoikiem, żeby mógł go normalnie chwycić. To podejście pozwala na chwycenie szkalnki, która znajduje się w dowolym miejsu osiągalnym przez ramię robota Velma.
-Do tej pory wszystko działało poprawnie i rozwiązanie opisane do tego momentu znajduje się w pliku `pickup_laydown.py`.
+Do tej pory wszystko działało poprawnie i rozwiązanie opisane do tego momentu znajduje się w pliku `pickup_laydown.py`.<br>
+Kolejnym etapem było wykorzystanie funkcji liczącej odwrtną kienmatykę robota w celu uelastycznienia działania programu. Celem było wyznaczenie pozycji oddalonej od szklanki do wykonania poprzez ruch w jimp (aktulanie jest to stała pozycja pośrednia) i położeni końcowego jako jedngo z najbliższych krańców stołu. Próba realzicaji tego zaania znajduje się w pliku `my_pickup_laydown.py`.
 
 ### Przestrzeń operacyjna robota
 
