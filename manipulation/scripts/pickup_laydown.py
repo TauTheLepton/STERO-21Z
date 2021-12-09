@@ -64,7 +64,11 @@ def makeCimpMove(velma, Tf_frame, announcement):
 # check if object is close enough to robot
 def isCloseEnough(object_pose, robot_pose):
     s = math.sqrt((object_pose[0] - robot_pose[0]) ** 2 + (object_pose[1] - robot_pose[1]) ** 2 + (object_pose[2] - robot_pose[2]) ** 2)
-    if s < 1.2:
+    x = abs(object_pose[0])
+    y = abs(object_pose[1])
+    # z in range (0.6, 1.4)
+    z = abs(object_pose[2])
+    if s < 1.2 and x > 0.9 and y > 0.5 and z < 1.4 and z > 0.6:
         return True
     else:
         return False
