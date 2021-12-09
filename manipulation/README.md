@@ -26,7 +26,6 @@ Do tej pory wszystko działało poprawnie i rozwiązanie opisane do tego momentu
 Została określona przy pomocy skryptu `reachability_range.py` z paczki `velma_common`. Została dopasowana do środowiska eksperymentalnie. Przestrzeń fioletowa to obszar, w którego zasięgu robot może dokonywać operacji.
 
 ![alt text](https://github.com/STERO-21Z/zubik-palczuk/blob/tiago/manipulation/data/rys/sphere_x_y.png)
-
 ![alt text](https://github.com/STERO-21Z/zubik-palczuk/blob/tiago/manipulation/data/rys/sphere_z.png)
 
 ### Struktura programu
