@@ -147,16 +147,22 @@ def main():
     #Get objects position form Gazebo
     # T_B_Table_a = velma.getTf("B", "table_a")
     # T_B_Table_b = velma.getTf("B", "table_b")
-    T_B_Jar = velma.getTf("B", "jar")
     # T_B_Bowl = velma.getTf("B", "bowl")
     # T_B_torso = velma.getTf("B", "torso")
-    T_B_arm1 = velma.getTf("B", "arm1")
-    T_B_base = velma.getTf("B", "base")
+    T_B_Table_a = velma.getTf("B", "table_a")
+    T_B_Table_b = velma.getTf("B", "table_b")
+    T_B_Jar = velma.getTf("B", "jar")
+    T_B_Bowl = velma.getTf("B", "bowl")
+    T_B_torso = velma.getTf("B", "torso_link0")
+    T_B_arm1 = velma.getTf("B", "right_arm_1_link")
+    T_B_base = velma.getTf("B", "torso_base")
+
     #Lookup where objects are located
     # print T_B_Table_a.M, T_B_Table_a.p
     # print T_B_Table_b.M, T_B_Table_b.p
     # print T_B_Jar.M, T_B_Jar.p
     # print T_B_Bowl.M, T_B_Bowl.p
+    
 
     orig_orient = T_B_base.M
     orig_pose = [T_B_base.p[0], T_B_base.p[1], T_B_arm1.p[2]]
