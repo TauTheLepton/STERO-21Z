@@ -78,6 +78,7 @@ def isCloseEnough(object_pose, robot_pose):
         return False
 
 def getIk(arm_name, T_A0_A7d, ampl):
+    positions = []
     assert arm_name in ('right', 'left')
  
     m_pub = MarkerPublisher('velma_ik_geom')
@@ -96,8 +97,9 @@ def getIk(arm_name, T_A0_A7d, ampl):
  
     base_link_name = 'calib_{}_arm_base_link'.format(arm_name)
     phase = 0.0
-    while not rospy.is_shutdown():
-        print js_msg
+    # while not rospy.is_shutdown():
+    for index in range(10000):
+        # print js_msg
         tx = ampl * math.sin(phase)
         ty = ampl * math.sin(phase*1.1)
         tz = ampl * math.sin(phase*1.2)
@@ -129,9 +131,23 @@ def getIk(arm_name, T_A0_A7d, ampl):
                 js_msg.position[i] = 0.0
             else:
                 js_msg.position[i] = q[i]
-        js_pub.publish(js_msg)
+        # js_pub.publish(js_msg)
+        positions.append(js_msg.position)
  
-        rospy.sleep(0.04)
+        # rospy.sleep(0.04)
+    return positions
+
+def maximumSum(state_list):
+    return max(state_list, key = sum)
+
+    # max_sum = sum(max(state_list, key = sum))
+    # for state in state_list:
+    #     if sum(state) == max_sum:
+    #         return state
+
+def goalPoint(table):
+    goal_pos = [table.p[0], table.p[1], 1]
+    return goal_pos
 
 def create_state(position):
     print len(position), position
@@ -267,9 +283,11 @@ def main():
     # planAndExecute(velma, p, q_pre_pickup)
     T_A0_A7d = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector(T_B_Jar.p[0] - 0.3, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
     states = getIk( 'right', T_B_Jar, 0.5 )
+    state = maximumSum(states)
+    print state
     # for state in states:
     #     planAndExecute(velma, p, create_state(state.position))
-    planAndExecute(velma, p, create_state(states[3].position))
+    planAndExecute(velma, p, create_state(state))
 
 
 
