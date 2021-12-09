@@ -84,7 +84,7 @@ Manipulation velma_system.launch
 
 Planner launch
 
-roslaunch velma_ros_plugin velma_planner.launch
+>roslaunch velma_ros_plugin velma_planner.launch
 
 RViz
 
