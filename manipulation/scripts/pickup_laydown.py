@@ -68,7 +68,7 @@ def isCloseEnough(object_pose, robot_pose):
     y = abs(object_pose[1])
     # z in range (0.6, 1.4)
     z = abs(object_pose[2])
-    if s < 1.2 and x > 0.9 and y > 0.5 and z < 1.4 and z > 0.6:
+    if s < 1.2 and x > 0.65 and y > 0.4 and z < 1.4 and z > 0.6:
         return True
     else:
         return False
@@ -145,11 +145,11 @@ def main():
 
 
     #Get objects position form Gazebo
-    T_B_Table_a = velma.getTf("B", "table_a")
-    T_B_Table_b = velma.getTf("B", "table_b")
+    # T_B_Table_a = velma.getTf("B", "table_a")
+    # T_B_Table_b = velma.getTf("B", "table_b")
     T_B_Jar = velma.getTf("B", "jar")
-    T_B_Bowl = velma.getTf("B", "bowl")
-    T_B_torso = velma.getTf("B", "torso")
+    # T_B_Bowl = velma.getTf("B", "bowl")
+    # T_B_torso = velma.getTf("B", "torso")
     T_B_arm1 = velma.getTf("B", "arm1")
     T_B_base = velma.getTf("B", "base")
     #Lookup where objects are located
@@ -163,7 +163,7 @@ def main():
     orig_base_rpy = T_B_base.M.GetRPY()
 
     # check if can reach
-    robot_pose = [T_B_torso.p[0], T_B_torso.p[1], T_B_arm1.p[2]]
+    robot_pose = [T_B_base.p[0], T_B_base.p[1], T_B_arm1.p[2]]
     if isCloseEnough(T_B_Jar.p, robot_pose):
         print "OBJECT IN REACH, PROCEEDING!!!"
     else:
@@ -205,8 +205,8 @@ def main():
     # print "T_B_Table_a.p"
     # print T_B_Table_a.p
 
-    # T_B_Jar = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
-    T_B_Jar = PyKDL.Frame(goal_orient_pickup, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
+    T_B_Jar = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
+    # T_B_Jar = PyKDL.Frame(goal_orient_pickup, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
     makeCimpMove(velma, T_B_Jar, "MOVING TOWARDS THE JAR!!!")
 
 
