@@ -4,7 +4,7 @@
 
 ### Cel zadania
 
-Celem projektu było napisanie programu sterującego robotem Velma, który spowoduje, że robot chwyci, przeniesie i odłoży obiekt w inne miejsce. Zadanie to może być zaprogramowanie z różnym stopniem elsatyczności algorytmu. W ogólności robot powinien dobrze zareagować na wydane podniesienie i odłożenie przedmiotu w dowolnej konfigracji środowiska. Na etapie oddania projektu robot potrafi zdecydować, czy zadanie ma sens (jest w stanie po niego sięgnąć), sięgnąć po obiekt, jeżeli znajduje się w zasięgu i odstawić go na drugi stolik w jedno określone miejsce).
+Celem projektu było napisanie programu sterującego robotem Velma, który spowoduje, że robot chwyci, przeniesie i odłoży obiekt w inne miejsce. Zadanie to może być zaprogramowanie z różnym stopniem elsatyczności algorytmu. W ogólności robot powinien dobrze zareagować na zadane podniesienie i odłożenie przedmiotu w dowolnej konfigracji środowiska. Na etapie oddania projektu robot potrafi zdecydować, czy zadanie ma sens (jest w stanie po niego sięgnąć), sięgnąć po obiekt, jeżeli znajduje się w zasięgu i odstawić go na drugi stolik w jedno określone miejsce.
 
 ### Pliki i Implementacja
 
@@ -13,14 +13,14 @@ Implemenatcja zadania znajduje się w pliku `pickup_laydown.py` (wersja dokończ
 
 ### Rozwój podejścia, zmiany koncepcji i implementacji
 
-Program stopniowo ewoluował. Zaczęto od najprostszej wersji, czyli takiej w której wszystkie pozycje są na stałe zapisane w kodzie w konfiguracji złączy. Stworzono octomapę serwerem online, zapisano ją do pliku i korzytano z jej poprzez serwer offline.<br>
-Następnie dodano planner który sam odnajdował optymalną trajektorię rucho od pozycji początkowej do szklanki i następnie do pozycji przed odstawieniem.
-To działanie pozwoliło nam z wielu pozycji pośrednich zapisanych w kodie zredukować ich liczbę do zaledwie 3 (wliczając pozycję początkową do której program sam wracał zawsze po odstawieniu słoja).<br>
+Program stopniowo ewoluował. Zaczęto od najprostszej wersji, czyli takiej w której wszystkie pozycje są na stałe zapisane w kodzie w konfiguracji złączy. Stworzono octomapę serwerem online, zapisano ją do pliku i korzytano z niej poprzez serwer offline.<br>
+Następnie dodano planner który sam odnajdował optymalną trajektorię ruchu od pozycji początkowej do szklanki i następnie do pozycji przed odstawieniem.
+To działanie pozwoliło nam z wielu pozycji pośrednich zapisanych w kodzie zredukować ich liczbę do zaledwie 3 (wliczając pozycję początkową do której program sam wracał zawsze po odstawieniu słoja).<br>
 Kolejnym krokiem było dodanie sterowania w trybie zadawania pozycji końcówki manipulatora jednej ręki w przestrzeni kartezjańskiej związanej z bazowym układem współrzędnych.
-Do tego potrzeba było odczytać pozycję szklanki ze świata rzeczywistego, co zrobiliśmy wczytując pozycję szklanki prosto z programu gazebo symulującgo naszą rzeczywistość.
-Do pozycji szklanki dodaliśmy stały offset tak, żeby manipulator zatrzymał się kawałem przed słoikiem, żeby mógł go normalnie chwycić. To podejście pozwala na chwycenie szkalnki, która znajduje się w dowolym miejsu osiągalnym przez ramię robota Velma.
+Do tego potrzeba było odczytać pozycję szklanki ze świata rzeczywistego, co zrobiliśmy wczytując pozycję szklanki prosto z programu gazebo symulującego naszą rzeczywistość.
+Do pozycji szklanki dodaliśmy stały offset tak, żeby manipulator zatrzymał się kawałek przed słoikiem, żeby mógł go normalnie chwycić. To podejście pozwala na chwycenie szkalnki, która znajduje się w dowolym miejsu osiągalnym przez ramię robota Velma.
 Do tej pory wszystko działało poprawnie i rozwiązanie opisane do tego momentu znajduje się w pliku `pickup_laydown.py`.<br>
-Kolejnym etapem było wykorzystanie funkcji liczącej odwrtną kienmatykę robota w celu uelastycznienia działania programu. Celem było wyznaczenie pozycji oddalonej od szklanki do wykonania poprzez ruch w jimp (aktulanie jest to stała pozycja pośrednia) i położeni końcowego jako jedngo z najbliższych krańców stołu. Próba realzicaji tego zaania znajduje się w pliku `my_pickup_laydown.py`.
+Kolejnym etapem było wykorzystanie funkcji liczącej odwrtną kinematykę robota w celu uelastycznienia działania programu. Celem było wyznaczenie pozycji oddalonej od szklanki do wykonania poprzez ruch w jimp (aktulanie jest to stała pozycja pośrednia) i położenia końcowego jako jedngo z najbliższych krańców stołu. Próba realizacji tego zadania znajduje się w pliku `my_pickup_laydown.py`.
 
 ### Przestrzeń operacyjna robota
 
