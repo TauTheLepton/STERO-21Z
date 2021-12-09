@@ -72,7 +72,7 @@ Ruch do pozycji początkowej (jimp).
 
 ![alt text](https://github.com/STERO-21Z/zubik-palczuk/blob/tiago/manipulation/data/rys/robot_state9.png)
 
-### Uruchmienie skryptu
+### Uruchomienie skryptu
 
 Reset buffers
 
