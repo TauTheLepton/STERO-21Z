@@ -262,5 +262,11 @@ def main():
     #     planAndExecute(velma, p, create_state(state.position))
     planAndExecute(velma, p, state)
 
+    T_B_pre_right_handle = PyKDL.Frame(T_B_right_handle.M, PyKDL.Vector(T_B_right_handle.p[0] - 0.1, T_B_right_handle.p[1]-0.1, T_B_right_handle.p[2] + 0.05))
+    makeCimpMove(velma, T_B_pre_right_handle, "MOVING TOWARDS THE HANDLE!!!")
+
+    planAndExecute(velma, p, q_start)
+
+
 if __name__ == "__main__":
     main()
