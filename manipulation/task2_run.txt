@@ -24,9 +24,13 @@ roslaunch velma_common octomap_offline_server.launch  octomap_file:=/home/studen
 
 #right_handle gazebo position
 
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=cabinet_door_fragile::right_handle frame_id:=right_handle
+
 roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:={cabinet_door_fragile::right_handle} frame_id:={right_handle}
 
 #right_door gazebo position
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=cabinet_door_fragile::right_door frame_id:=right_door
 
 roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:={cabinet_door_fragile::right_door} frame_id:={right_door}
 
