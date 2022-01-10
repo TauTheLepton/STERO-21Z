@@ -153,3 +153,48 @@ Działanie naszego programu zostało pokazane na poniższym filmie.
 https://user-images.githubusercontent.com/80065197/148781452-4c7fee18-ad25-42dd-af6b-1e7cbd622d4e.mp4
 
 ### Uruchomienie skryptu
+
+Reset buffers
+
+>rosrun velma_common reset_shm_comm.py
+
+Roscore
+
+>roscore
+
+Manipulation velma_system_cabinet.launch
+
+>roslaunch manipulation velma_system_cabinet.launch
+
+Planner launch
+
+>roslaunch velma_ros_plugin velma_planner.launch
+
+RViz
+
+>rosrun rcprg_ros_utils run_rviz.sh
+
+Gazebo
+
+>roslaunch rcprg_gazebo_utils gazebo_client.launch
+
+Octomap offline
+
+>roslaunch velma_common octomap_offline_server.launch  octomap_file:=/home/student/mobile_ws/src/zubik-palczuk/manipulation/data/cabinet_octomap.bt
+
+Cabinet door handle gazebo position
+
+>roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=cabinet_door_fragile::right_handle frame_id:=right_handle
+
+Robot base gazebo position
+
+>roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=velma::torso_base frame_id:=base
+
+Home motors
+
+>rosrun velma_task_cs_ros_interface initialize_robot.py
+
+Pickup_laydown script
+
+>cd /.../manipulation/scripts 
+>python pickup_laydown.py
