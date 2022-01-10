@@ -120,7 +120,8 @@ Home motors
 
 Pickup_laydown script
 
->cd /.../manipulation/scripts 
+>cd /.../manipulation/scripts
+>
 >python pickup_laydown.py
 
 ## Projekt 2
@@ -196,5 +197,6 @@ Home motors
 
 Pickup_laydown script
 
->cd /.../manipulation/scripts 
+>cd /.../manipulation/scripts
+>
 >python pickup_laydown.py
