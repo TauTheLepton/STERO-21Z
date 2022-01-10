@@ -47,16 +47,13 @@ def planAndExecute(velma, p, q_dest):
     if not isConfigurationClose(q_dest, js[1]):
         exitError(6)
 
-def makeCimpMove(velma, Tf_frame, announcement, error14=True, error11=True):
+def makeCimpMove(velma, Tf_frame, announcement):
     # print "Switch to cart_imp mode (no trajectory)..."
     myMessage(announcement)
     if not velma.moveCartImpRightCurrentPos(start_time=0.2):
         exitError(10)
-    if error11:
-        if velma.waitForEffectorRight() != 0:
-            exitError(11)
-    else:
-        rospy.sleep(3)
+    if velma.waitForEffectorRight() != 0:
+        exitError(11)
 
     rospy.sleep(0.5)
 
@@ -67,12 +64,9 @@ def makeCimpMove(velma, Tf_frame, announcement, error14=True, error11=True):
     # print announcement
     if not velma.moveCartImpRight([Tf_frame], [3.0], None, None, None, None, PyKDL.Wrench(PyKDL.Vector(5,5,5), PyKDL.Vector(5,5,5)), start_time=0.5):
         exitError(13)
-    if error14:
-        if velma.waitForEffectorRight() != 0:
-            exitError(14)
-        rospy.sleep(0.5)
-    else:
-        rospy.sleep(5)
+    if velma.waitForEffectorRight() != 0:
+        exitError(14)
+    rospy.sleep(0.5)
     print "Calculating difference between desiread and reached pose..."
     T_B_T_diff = PyKDL.diff(Tf_frame, Tf_frame, 1.0)
     print T_B_T_diff
@@ -146,16 +140,7 @@ def getIk(arm_name, T_B_A7d, loop_max):
                     js_msg.header.stamp = rospy.Time.now()
                     for i in range(7):
                         js_msg.position[i] = arm_q[i]
-                    # js_msgs.append(js_msg) TODO usunac?
                     return js_msg
-                    # js_pub.publish(js_msg)
-        #             rospy.sleep(0.04)
-        #         if rospy.is_shutdown():
-        #             break
-        #     if rospy.is_shutdown():
-        #         break
-        # rospy.sleep(0.04)
-    # return js_msgs TODO usunac?
 
 def createState(state_msg, arm_name):
     assert arm_name in ('left', 'right')
@@ -253,23 +238,12 @@ def main():
 
     myMessage('MOVING TO INTERMEDIATE POSITION')
     T_A0_A7d = PyKDL.Frame(T_B_base.M, PyKDL.Vector(T_B_right_handle.p[0] - 0.45, T_B_right_handle.p[1] - 0.6, T_B_right_handle.p[2]))
-    # print 'RIGHT HANDLE POSITION'
-    # print T_B_right_handle
     state_msg = getIk( 'right', T_A0_A7d, 5 )
     if state_msg is None:
         myMessage('DID NOT GET INVERSED KINEMATICS')
         return 0
-    # state = max(states, key=sum)
-    # myMessage('state msg')
-    # myMessage(state_msg)
     state = createState(state_msg, 'right')
-    # myMessage('state')
-    # myMessage(state)
-    # for state in states:
-    #     planAndExecute(velma, p, create_state(state.position))
     planAndExecute(velma, p, state)
-
-    # halfCloseGrip(velma)
 
     print "Switch to cart_imp mode (no trajectory)..."
     if not velma.moveCartImpRightCurrentPos(start_time=0.2):
@@ -292,30 +266,18 @@ def main():
 
     almostCloseGrip(velma)
 
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.27, T_B_right_handle.p[1] - 0.15, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "SMASH DOOR")
-
     # Grip offset
     T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.25, T_B_right_handle.p[1] - 0.12, T_B_right_handle.p[2] + 0.16))
     makeCimpMove(velma, T_B_next_to_handle, "TOUCH HANDLE")
 
     closeGrip(velma)
 
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.25, T_B_right_handle.p[1] - 0.13, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "CORRECT GRIP")
-
     # Grip offset
     T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.35, T_B_right_handle.p[1] - 0.14, T_B_right_handle.p[2] + 0.16))
-    makeCimpMove(velma, T_B_next_to_handle, "OPEN DOOR")#error14=False
+    makeCimpMove(velma, T_B_next_to_handle, "OPEN DOOR")
     rospy.sleep(3)
 
     openGrip(velma)
-
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.45, T_B_right_handle.p[1] - 0.21, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "OPEN DOOR 2", error11=False)
 
     # Grip offset
     T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.35, T_B_right_handle.p[1] - 0.22, T_B_right_handle.p[2] + 0.16))
@@ -328,20 +290,35 @@ def main():
     T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.35, T_B_right_handle.p[1] - 0.22, T_B_right_handle.p[2] + 0.16))
     makeCimpMove(velma, T_B_next_to_handle, "ROTATE GRIP")
 
-    closeGrip(velma)
-
     # Grip offset
     T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.35, T_B_right_handle.p[1] + 0.4, T_B_right_handle.p[2] + 0.16))
     makeCimpMove(velma, T_B_next_to_handle, "MOVE TO OTHER SIDE OF DOOR")
-
-    openGrip(velma)
 
     # Grip offset
     T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.2, T_B_right_handle.p[1] + 0.25, T_B_right_handle.p[2] + 0.16))
     makeCimpMove(velma, T_B_next_to_handle, "MOVE NEXT TO DOOR BEFORE PUSH")
 
-    # halfCloseGrip(velma)
-    # openGrip(velma)
+    almostCloseGrip(velma)
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.15, T_B_right_handle.p[1] + 0.35, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "BACK OUT A LITTLE TO CLOSE GRIP")
+
+    closeGrip(velma)
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.3, T_B_right_handle.p[1] - 0.05, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "PUSH DOOR")
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_base.p[0] + 0.5, T_B_base.p[1] - 0.5, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "MOVE AWAY FROM DOOR")
+
+    openGrip(velma)
+
+    myMessage('MOVING TO START POSITION')
+    planAndExecute(velma, p, q_start)
+
 
 if __name__ == "__main__":
     main()
