@@ -123,3 +123,33 @@ Pickup_laydown script
 >cd /.../manipulation/scripts 
 >python pickup_laydown.py
 
+## Projekt 2
+
+### Cel zadania
+
+Naszym zadaniem było napisać program sterujący robotem Velma, który sprawi, że robot otworzy drzwiczki szafki.
+Co ważne, model szafki użyty do symulacji w programie Gazebo miał mieć delikatne i wyłamywalne uchwyty, więc w trakcie realizacji zadania musieliśmy zadbać o to, żeby robot nie zniszczył uchwytów.
+
+### Pliki i Implementacja
+
+Implementacja tego zadania znajduje się w plikach `open_door.py` oraz `open_door2.py`, świat dużyty do symulacji to `cabinet.world`, natomiast octomapa znajduje się w pliku `cabinet_octomap.bt`. 
+
+### Rozwój podejścia, zmiany koncepcji i implementacji
+
+Zadanie to można wykonać z różnym stopniem elastyczności.
+Nasze pierwsze rozwiązanie (`open_door.py`) jest niezawodne i częściowo elastyczne, ponieważ powinno umożliwiać przesunięcie szafki (oczywiście w granicach zasięgu ramiania robota).
+Niestety nie umożliwia ono obracania szafką.
+Tą funkcjonalność powinno zawierać nasze drugie rozwiązanie (`open_door2.py`).
+Ono z kolei nie jest dokończone, nie działa ono zawsze i pewnie.
+
+### Struktura programu
+
+Oba nasze rozwiązania zostały napisane jako skończone automaty stanowe, co dodaje elastyczności w ewentualnych korektach implementacji.
+
+### Działanie programu (środowisko Gazebo)
+
+Działanie naszego programu zostało pokazane na poniższym filmie.
+
+https://user-images.githubusercontent.com/80065197/148781452-4c7fee18-ad25-42dd-af6b-1e7cbd622d4e.mp4
+
+### Uruchomienie skryptu
