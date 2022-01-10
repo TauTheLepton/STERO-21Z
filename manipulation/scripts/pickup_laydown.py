@@ -210,8 +210,7 @@ def main():
     # print T_B_Table_a.M
     # print "T_B_Table_a.p"
     # print T_B_Table_a.p
-    T_B_Er = 
-T_B_Jar
+    T_B_Er = T_B_Jar
 
     T_B_Jar = PyKDL.Frame(T_B_Jar.M, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))
     # T_B_Jar = PyKDL.Frame(goal_orient_pickup, PyKDL.Vector( T_B_Jar.p[0] - 0.25, T_B_Jar.p[1], T_B_Jar.p[2] + 0.1))

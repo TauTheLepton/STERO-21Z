@@ -1,0 +1,48 @@
+#Reset buffers
+
+rosrun velma_common reset_shm_comm.py
+
+#Manipulation velma_system.launch
+
+roslaunch  manipulation velma_system_cabinet.launch
+
+#Planner launch
+
+roslaunch velma_ros_plugin velma_planner.launch
+
+#RViz
+
+rosrun rcprg_ros_utils run_rviz.sh
+
+#Gazebo
+
+roslaunch rcprg_gazebo_utils gazebo_client.launch
+
+#Octomap offline
+
+roslaunch velma_common octomap_offline_server.launch  octomap_file:=/home/student/mobile_ws/src/zubik-palczuk/manipulation/data/cabinet_octomap3.bt
+
+#right_handle gazebo position
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=cabinet_door_fragile::right_handle frame_id:=right_handle
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:={cabinet_door_fragile::right_handle} frame_id:={right_handle}
+
+#right_door gazebo position
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:=cabinet_door_fragile::right_door frame_id:=right_door
+
+roslaunch rcprg_gazebo_utils gazebo_publish_ros_tf_object.launch link_name:={cabinet_door_fragile::right_door} frame_id:={right_door}
+
+#Home motors
+
+rosrun velma_task_cs_ros_interface initialize_robot.py
+
+#Pickup laydown script
+
+/.../manipulation/scripts python open_door.py
+
+
+
+
+
