@@ -255,7 +255,11 @@ def main():
         myMessage('DID NOT GET INVERSED KINEMATICS')
         return 0
     state = createState(state_msg, 'right')
-    planAndExecute(velma, p, state)
+    try:
+        planAndExecute(velma, p, state)
+    except:
+        myMessage("Cabinet out of reach :(")
+        exitError(6)
 
 
     print "Switch to cart_imp mode (no trajectory)..."
@@ -303,52 +307,39 @@ def main():
     T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.35, T_B_right_handle.p[1] - 0.22, T_B_right_handle.p[2] + 0.16))
     makeCimpMove(velma, T_B_next_to_handle, "ROTATE GRIP")
 
+    closeGrip(velma)
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.35, T_B_right_handle.p[1] + 0.3, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "MOVE TO OTHER SIDE OF DOOR")
+
+    openGrip(velma)
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.2, T_B_right_handle.p[1] + 0.25, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "MOVE NEXT TO DOOR BEFORE PUSH")
+
+    almostCloseGrip(velma)
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.15, T_B_right_handle.p[1] + 0.35, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "BACK OUT A LITTLE TO CLOSE GRIP")
+
+    closeGrip(velma)
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.15, T_B_right_handle.p[1] - 0.05, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "PUSH DOOR")
+
+    # Grip offset
+    T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_base.p[0] + 0.5, T_B_base.p[1] - 0.5, T_B_right_handle.p[2] + 0.16))
+    makeCimpMove(velma, T_B_next_to_handle, "MOVE AWAY FROM DOOR")
+
+    openGrip(velma)
+
+    myMessage('MOVING TO START POSITION')
     planAndExecute(velma, p, q_start)
 
-    # T_B_after_handle = velma.getTf("B", "right_handle")
-    # T_after_handle = PyKDL.Frame(orient, PyKDL.Vector(float(T_B_after_handle[0]), float(T_B_after_handle[1]) - 0.2, float(T_B_after_handle[2])))
-
-    # myMessage("GO to AFTERPOSE")
-    # state_msg = getIk( 'right', T_after_hanlde, 5 )
-    # if state_msg is None:
-    #     myMessage('DID NOT GET INVERSED KINEMATICS')
-    #     return 0
-    # state = createState(state_msg, 'right')
-    # planAndExecute(velma, p, state)
-
-
-
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.35, T_B_right_handle.p[1] + 0.4, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "MOVE TO OTHER SIDE OF DOOR")
-
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.2, T_B_right_handle.p[1] + 0.25, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "MOVE NEXT TO DOOR BEFORE PUSH")
-
-    # almostCloseGrip(velma)
-
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.15, T_B_right_handle.p[1] + 0.35, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "BACK OUT A LITTLE TO CLOSE GRIP")
-
-    # closeGrip(velma)
-
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_right_handle.p[0] - 0.3, T_B_right_handle.p[1] - 0.05, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "PUSH DOOR")
-
-    # # Grip offset
-    # T_B_next_to_handle = PyKDL.Frame(orient, PyKDL.Vector(T_B_base.p[0] + 0.5, T_B_base.p[1] - 0.5, T_B_right_handle.p[2] + 0.16))
-    # makeCimpMove(velma, T_B_next_to_handle, "MOVE AWAY FROM DOOR")
-
-    # openGrip(velma)
-
-    # myMessage('MOVING TO START POSITION')
-    # planAndExecute(velma, p, q_start)
-
-    # myMessage("BACK TO START")
-    # planAndExecute(velma, p, q_start)
 
 if __name__ == "__main__":
     main()
