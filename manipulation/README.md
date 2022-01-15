@@ -131,6 +131,9 @@ Pickup_laydown script
 Naszym zadaniem było napisać program sterujący robotem Velma, który sprawi, że robot otworzy drzwiczki szafki.
 Co ważne, model szafki użyty do symulacji w programie Gazebo miał mieć delikatne i wyłamywalne uchwyty, więc w trakcie realizacji zadania musieliśmy zadbać o to, żeby robot nie zniszczył uchwytów.
 
+### Analiza wymagań
+![Req diagram](https://github.com/STERO-21Z/zubik-palczuk/blob/tiago/manipulation/data/rys/wymagania.png)
+
 ### Pliki i Implementacja
 
 Implementacja tego zadania znajduje się w plikach `open_door.py` oraz `open_door2.py`, świat dużyty do symulacji to `cabinet.world`, natomiast octomapa znajduje się w pliku `cabinet_octomap.bt`. 
@@ -151,7 +154,7 @@ Poniżej zostały przedstawione wybrane elementy systemu sterowania w języki **
 
 - Diagram sekwencji dla węzła sterującego procesem otwierania szafki
 
-![Sequence_Diagram1](https://github.com/STERO-21Z/zubik-palczuk/blob/tiago/manipulation/data/rys/Sequence_Diagram1.png)
+![Sequence Diagram1](https://user-images.githubusercontent.com/80065197/149624765-78de4729-3b08-4f84-86b2-482ce2253df5.png)
 
 ### Działanie programu (środowisko Gazebo)
 
