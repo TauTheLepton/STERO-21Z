@@ -151,7 +151,7 @@ Poniżej zostały przedstawione wybrane elementy systemu sterowania w języki **
 
 - Diagram sekwencji dla węzła sterującego procesem otwierania szafki
 
-![Sequence Diagram1](https://user-images.githubusercontent.com/80065197/149624765-78de4729-3b08-4f84-86b2-482ce2253df5.png)
+![Sequence_Diagram1](https://github.com/STERO-21Z/zubik-palczuk/blob/tiago/manipulation/data/rys/Sequence_Diagram1.png)
 
 ### Działanie programu (środowisko Gazebo)
 
