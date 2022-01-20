@@ -148,13 +148,17 @@ Ono z kolei nie jest dokończone, nie działa ono zawsze i pewnie.
 
 ### Struktura programu
 
-Oba nasze rozwiązania zostały napisane jako skończone automaty stanowe, co dodaje elastyczności w ewentualnych korektach implementacji.
-
-Poniżej zostały przedstawione wybrane elementy systemu sterowania w języki **SysML**:
+Poniżej zostały przedstawione wybrane elementy systemu sterowania w języku **SysML**:
 
 - Diagram sekwencji dla węzła sterującego procesem otwierania szafki
 
-![Sequence Diagram1](https://user-images.githubusercontent.com/80065197/149624765-78de4729-3b08-4f84-86b2-482ce2253df5.png)
+![Sequence Diagram1](data/rys/Sequence_Diagram1.png)
+
+- Diagram aktywności dla procesu otwierania szafki
+
+<!-- ![Activity Diagram1](data/rys/Activity_Diagram1.png) -->
+
+![Activity Diagram2](data/rys/Activity_Diagram2.png)
 
 ### Działanie programu (środowisko Gazebo)
 
