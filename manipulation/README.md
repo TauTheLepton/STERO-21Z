@@ -150,15 +150,44 @@ Ono z kolei nie jest dokończone, nie działa ono zawsze i pewnie.
 
 Poniżej zostały przedstawione wybrane elementy systemu sterowania w języku **SysML**:
 
-- Diagram sekwencji dla węzła sterującego procesem otwierania szafki
+- Diagram aktywności
 
+![Aktywności](data/rys/Aktywności.png)
+
+- Diagramy sekwencji dla węzła sterującego procesem otwierania szafki, po jednym dla każdej aktywności z diagramu aktywności
+
+  - Inicjalizacja
+
+![Inicjalizacja](data/rys/Inicjalizacja.png)
+
+  - Ruch do pozycji przed złapaniem uchwytu szafki
+
+![Ruch_do_pozycji_przed_złapaniem_uchwytu_szafki](data/rys/Ruch_do_pozycji_przed_złapaniem_uchwytu_szafki.png)
+
+  - Złapanie uchwytu szafki
+
+![Złapanie_uchwytu_szafki](data/rys/Złapanie_uchwytu_szafki.png)
+
+  - Lekkie otwarcie drzwiczek szafki
+
+![Lekkie_otwarcie_drzwiczek_szafki](data/rys/Lekkie_otwarcie_drzwiczek_szafki.png)
+
+  - Popchnięcie drzwiczek szafki do pełnego otwarcia
+
+![Popchnięcie_drzwiczek_szafki_do_pełnego_otwarcia](data/rys/Popchnięcie_drzwiczek_szafki_do_pełnego_otwarcia.png)
+
+  - Ruch do pozycji początkowej
+
+![Ruch_do_pozycji_początkowej](data/rys/Ruch_do_pozycji_początkowej.png)
+
+<!-- STARE
 ![Sequence Diagram1](data/rys/Sequence_Diagram1.png)
 
 - Diagram aktywności dla procesu otwierania szafki
 
-<!-- ![Activity Diagram1](data/rys/Activity_Diagram1.png) -->
+![Activity Diagram1](data/rys/Activity_Diagram1.png)
 
-![Activity Diagram2](data/rys/Activity_Diagram2.png)
+![Activity Diagram2](data/rys/Activity_Diagram2.png) -->
 
 ### Działanie programu (środowisko Gazebo)
 
